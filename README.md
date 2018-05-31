@@ -8,6 +8,12 @@ I will be also adding some useless stuff to test the code and make sure it works
 
 ## Reading Links
 I like some of these documentations on how to use JavaFX. Note: Please don't sue me, I don't own any of the links that I'm posting.
-[JavaFX Tutorial for basic Games] (https://gamedevelopment.tutsplus.com/tutorials/introduction-to-javafx-for-game-development--cms-23835)
-[ORACLE Documentation] (https://docs.oracle.com/javase/8/javafx/get-started-tutorial/jfx-overview.htm)
-[Java Docs Javafx.Scene] (https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Scene.html)
+
+
+[JavaFX Tutorial for basic Games] (https://gamedevelopment.tutsplus.com/tutorials/introduction-to-javafx-for-game-development--cms-23835).
+
+
+[ORACLE Documentation] (https://docs.oracle.com/javase/8/javafx/get-started-tutorial/jfx-overview.htm).
+
+
+[Java Docs Javafx.Scene] (https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Scene.html).
