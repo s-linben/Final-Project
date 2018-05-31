@@ -2,6 +2,12 @@ package main;
 
 import javafx.scene.image.Image;
 
+/**
+ * This class is intended to process and update the animation for each entity based on the time.
+ * 
+ * @author s-linben
+ *
+ */
 public class Animation {
 	
 	private Image[] frames;

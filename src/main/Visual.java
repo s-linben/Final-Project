@@ -15,11 +15,16 @@ import javafx.scene.text.Font;					// Remove this once you delete the practice s
 import javafx.scene.text.FontWeight;			// Remove this as well, because don't need automated text
 import javafx.scene.input.KeyEvent;
 
+/**
+ * 
+ * @author Benjamin Lin
+ *
+ */
 public class Visual extends Application {
 	
 	public static void main(String[] args) {
 		
-		
+		launch(args);
 		
 	}
 	
@@ -37,6 +42,7 @@ public class Visual extends Application {
 		Canvas canvas = new Canvas(1000,1000);
 		root.getChildren().add(canvas);
 		
+		stage.show();
 		
 	}
 	

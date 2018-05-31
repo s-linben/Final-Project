@@ -14,4 +14,18 @@ public class Player	extends Sprite {
 		
 	}
 	
+	public Animation getIdleLeft() {
+		
+		return idleLeft;
+		
+	}
+	
+	public Animation getIdleRight() {
+		
+		return idleRight;
+		
+	}
+	
+	
+	
 }

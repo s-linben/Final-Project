@@ -1,9 +1,9 @@
 package entity;
 
 import main.Animation;
-improt javafx.scene.image.Image;
+import javafx.scene.image.Image;
 
-public class Item extends sprite {
+public class Item extends Sprite {
 	
 	protected Animation idle;
 	protected String description;
