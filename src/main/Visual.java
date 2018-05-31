@@ -25,8 +25,18 @@ public class Visual extends Application {
 	
 	@Override
 	public void start(Stage stage) {
+		// The Stage variable is the window it first initializes
 		
 		stage.setTitle("The Trip");
+		// The name of the game and the window now
+		
+		Group root = new Group();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		
+		Canvas canvas = new Canvas(1000,1000);
+		root.getChildren().add(canvas);
+		
 		
 	}
 	
