@@ -3,7 +3,7 @@ package entity;
 import main.Animation;
 
 public class Sprite {
-	protected int x, y;
+	protected int x, y, layer;
 	
 	public Sprite() {
 		
