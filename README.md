@@ -1,6 +1,3 @@
-# NOTHING WORKS YET!!!
-I just made this repository and I finally figured out how to commit properly to github... XD
-
 # About
 This is a final project on the story of a dying person, as you travel through his/her past. You uncover more and more, eventually recovering from your supposed amnesia. The main focus of the game is to create a seemingly human-like experience when dealing with death, similar to how Shakespeare did it (though less dramatic and no "poisonous unctions").
 
