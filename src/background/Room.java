@@ -17,5 +17,22 @@ public class Room {
 		
 	}
 	
+	public ArrayList<Item> getItems() {
+		
+		return items;
+		
+	}
+	
+	public String getDescription() {
+		
+		return description;
+		
+	}
+	
+	public void setNextRoom(Room nextRoom) {
+		
+		this.nextRoom = nextRoom;
+		
+	}
 	
 }

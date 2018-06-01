@@ -14,6 +14,11 @@ import javafx.scene.paint.Color;				// This is for color
 import javafx.scene.text.Font;					// Remove this once you delete the practice stuff, useless
 import javafx.scene.text.FontWeight;			// Remove this as well, because don't need automated text
 import javafx.scene.input.KeyEvent;
+import java.io.File;							// File Class
+import java.io.FileReader;						// FileReader Class
+import java.io.PrintStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * 
@@ -32,6 +37,8 @@ public class Visual extends Application {
 	public void start(Stage stage) {
 		// The Stage variable is the window it first initializes
 		
+		initializer();
+		
 		stage.setTitle("The Trip");
 		// The name of the game and the window now
 		
@@ -44,6 +51,31 @@ public class Visual extends Application {
 		
 		stage.show();
 		
+		new AnimationTimer() {
+			
+			public void handle(long currentNanoTime) {
+				
+				
+				
+			}
+			
+		}.start();
+		
 	}
 	
+	private static void initializer(String file) {
+		
+		ArrayList<ArrayList<String>> input = new ArrayList<ArrayList<String>>();
+		
+		File in;
+		File out;
+		String filename;
+		
+		
+		
+		
+		//initialReader();
+		
+	}
+
 }

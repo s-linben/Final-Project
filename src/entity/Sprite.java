@@ -4,6 +4,7 @@ import main.Animation;
 
 public class Sprite {
 	protected int x, y, layer;
+	protected int[] hitbox;
 	
 	public Sprite() {
 		

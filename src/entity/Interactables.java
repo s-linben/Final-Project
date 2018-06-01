@@ -2,6 +2,6 @@ package entity;
 
 public class Interactables {
 	
-	String examine;
-	
+	private String examine;
+	private boolean canPickUP;
 }
