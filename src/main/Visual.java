@@ -19,8 +19,11 @@ import java.io.FileReader;						// FileReader Class
 import java.io.PrintStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import background.Room;
 
 /**
+ * 
+ * This class is also the main class where everything is stored. 
  * 
  * @author Benjamin Lin
  *
@@ -37,6 +40,7 @@ public class Visual extends Application {
 	public void start(Stage stage) {
 		// The Stage variable is the window it first initializes
 		
+		Room room_1;
 		initializer();
 		
 		stage.setTitle("The Trip");
@@ -64,6 +68,10 @@ public class Visual extends Application {
 	}
 	
 	private static void initializer(String file) {
+		// This needs to return the room
+		
+		fileToRoom("Potato");
+		fileToItem("Potato");
 		
 		ArrayList<ArrayList<String>> input = new ArrayList<ArrayList<String>>();
 		
@@ -75,6 +83,45 @@ public class Visual extends Application {
 		
 		
 		//initialReader();
+		
+	}
+	
+	private static void fileToRoom(String file) throws FileNotFoundException {
+		
+		// This will break if it does not find the file
+		
+		ArrayList<String> text = fileToArray(new File(file));
+		
+	}
+	
+	private static void fileToItem(String file) {
+		
+		
+		
+	}
+	
+	private static boolean fileExists() {
+		
+		return false;
+		
+	}
+	
+	private static ArrayList<String> fileToArray(File file) throws FileNotFoundException {
+		
+		ArrayList<String> array = new ArrayList<String>();
+		
+		FileReader fileRead = new FileReader(file);
+		Scanner input = new Scanner(fileRead);
+		
+		while (input.hasNextLine()) {
+			
+			array.add(input.nextLine());
+			
+		}
+		
+		input.close();
+		
+		return new ArrayList<String>();
 		
 	}
 

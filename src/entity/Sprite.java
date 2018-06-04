@@ -3,6 +3,9 @@ package entity;
 import main.Animation;
 
 public class Sprite {
+	
+	protected String name;		// The name of the item
+	protected int id;			// This increments progressively per item of this
 	protected int x, y, layer;
 	protected int[] hitbox;
 	
@@ -41,6 +44,12 @@ public class Sprite {
 	public void setY(int y) {
 		
 		this.y = y;
+		
+	}
+	
+	public String toString() {
+		
+		return name + "\t" + id + "\t" + x + "\t" + y + "\t" + layer;
 		
 	}
 	

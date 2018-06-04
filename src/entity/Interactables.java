@@ -1,7 +1,10 @@
 package entity;
 
-public class Interactables {
+import javafx.scene.image.Image;
+
+public class Interactables extends Prop {
 	
 	private String examine;
-	private boolean canPickUP;
+	
+	
 }

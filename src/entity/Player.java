@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 
 public class Player	extends Entity {
 	
+	
+	
 	public Image getPortrait() {
 		
 		return portrait;
