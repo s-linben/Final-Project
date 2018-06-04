@@ -1,5 +1,5 @@
 package entity;
 
-public class TileMap extends Sprite{
+public class TileMap extends Prop {
 
 }
