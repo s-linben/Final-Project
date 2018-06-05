@@ -14,10 +14,17 @@ public class Room {
 	private Player player;
 	private Room nextRoom;
 	private String description;
+	private int roomNum;
 	
 	public Room() {
 		
-		this.Room(new Player())
+		barriers = new ArrayList<Barrier>();
+		entities = new ArrayList<Entity>();
+		interactable = new ArrayList<Interactables>();
+		items = new ArrayList<Item>();
+		props = new ArrayList<Prop>();
+		tiles = new ArrayList<TileMap>();
+		player = new Player();
 		
 	}
 	
@@ -60,9 +67,63 @@ public class Room {
 	/*
 	 * This method should sort all incoming data on a line by line basis.
 	 */
-	public void sort(String input) {
+	public void addItem(String text) {
 		
 		
+		
+	}
+	
+	public void addBarrier(String text) {
+		
+		
+		
+	}
+	
+	public void addEntity(String text) {
+		
+		
+		
+	}
+	
+	public void addProp(String text) {
+		
+		
+		
+	}
+	
+	public void addTiles(String text) {
+		
+		
+		
+	}
+	
+	public void addInteractable(String text) {
+		
+		
+		
+	}
+	
+	public int getRoomNum() {
+		
+		return roomNum;
+		
+	}
+	
+	public void setRoomNum(int roomNum) {
+		
+		this.roomNum = roomNum;
+		
+	}
+	
+	public Player getPlayer() {
+		
+		return player;
+		
+	}
+	
+	public void setPlayer(Player player) {
+		
+		this.player = player;
 		
 	}
 	

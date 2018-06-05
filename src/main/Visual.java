@@ -67,11 +67,10 @@ public class Visual extends Application {
 		
 	}
 	
-	private static void initializer(String file) {
+	private static void initializer(String file) throws FileNotFoundException {
 		// This needs to return the room
 		
-		fileToRoom("Potato");
-		fileToItem("Potato");
+		Room room = fileToRoom("Potato");
 		
 		ArrayList<ArrayList<String>> input = new ArrayList<ArrayList<String>>();
 		
@@ -86,23 +85,90 @@ public class Visual extends Application {
 		
 	}
 	
-	private static void fileToRoom(String file) throws FileNotFoundException {
-		
+	private static Room fileToRoom(String file) throws FileNotFoundException {
 		// This will break if it does not find the file
 		
+		Room room = new Room();
 		ArrayList<String> text = fileToArray(new File(file));
 		
+		room.setRoomNum(Integer.parseInt(text.get(0)));
+		fileToTileMaps(text.get(1),room);
+		fileToProps(text.get(2),room);
+		fileToBarrier(text.get(3),room);
+		fileToInteractable(text.get(4),room);
+		fileToItem(text.get(5),room);
+		
+		return room;
 	}
 	
-	private static void fileToItem(String file) {
+	private static void fileToTileMaps(String file,Room room) throws FileNotFoundException {
 		
+		File itemFile = new File(file);
+		Scanner reader = new Scanner(itemFile);
 		
+		while (reader.hasNextLine()) {
+			
+			
+			
+		}
 		
 	}
 	
-	private static boolean fileExists() {
+	private static void fileToProps(String file,Room room) throws FileNotFoundException {
 		
-		return false;
+		File itemFile = new File(file);
+		Scanner reader = new Scanner(itemFile);
+		
+		while (reader.hasNextLine()) {
+			
+			
+			
+		}
+		
+	}
+	
+	private static void fileToBarrier(String file,Room room) throws FileNotFoundException {
+		
+		File itemFile = new File(file);
+		Scanner reader = new Scanner(itemFile);
+		
+		while (reader.hasNextLine()) {
+			
+			
+			
+		}
+		
+	}
+	
+	private static void fileToInteractable(String file,Room room) throws FileNotFoundException {
+		
+		File itemFile = new File(file);
+		Scanner reader = new Scanner(itemFile);
+		
+		while (reader.hasNextLine()) {
+			
+			
+			
+		}
+		
+	}
+	
+	private static void fileToItem(String file,Room room) throws FileNotFoundException {
+		
+		File itemFile = new File(file);
+		Scanner reader = new Scanner(itemFile);
+		
+		while (reader.hasNextLine()) {
+			
+			room.addItem(reader.nextLine());
+			
+		}
+		
+	}
+	
+	private static void fileToPlayer(String file) throws FileNotFoundException {
+		
+		
 		
 	}
 	
