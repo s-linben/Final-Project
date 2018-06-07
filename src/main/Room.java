@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Room {
 	private ArrayList<Option> questions;
 	private ArrayList<Entity> entities;
+	private Room nextRoom;
 	
 	public Room() {
 		questions = new ArrayList<Option>();
@@ -15,6 +16,11 @@ public class Room {
 	public Room(ArrayList<Option> questions,ArrayList<Entity> entities) {
 		this.questions = questions;
 		this.entities = entities;
+	}
+	
+	public Room(ArrayList<Option> questions,ArrayList<Entity> entities,Room nextRoom) {
+		this(questions,entities);
+		this.nextRoom = nextRoom;
 	}
 	
 	public ArrayList<Option> getQuestions() {
@@ -35,6 +41,10 @@ public class Room {
 			choices[index] = new Choice(choiceText[index]);
 		}
 		questions.add(new Option(temp[0],choices,Integer.parseInt(temp[2])));
+	}
+	
+	public void addEntity(String text) {
+		
 	}
 	
 }

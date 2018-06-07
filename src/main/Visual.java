@@ -91,13 +91,6 @@ public class Visual extends Application {
 		Room room = new Room();
 		ArrayList<String> text = fileToArray(new File(file));
 		
-		room.setRoomNum(Integer.parseInt(text.get(0)));
-		fileToTileMaps(text.get(1),room);
-		fileToProps(text.get(2),room);
-		fileToBarrier(text.get(3),room);
-		fileToInteractable(text.get(4),room);
-		fileToItem(text.get(5),room);
-		
 		return room;
 	}
 	
