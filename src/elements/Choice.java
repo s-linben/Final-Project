@@ -2,20 +2,21 @@ package elements;
 
 public class Choice {
 	protected String choice;
-	protected boolean done;
+	protected int result;		// This is the integer value that tells whether this is a positive, negative, or neutral choice
 	
 	public Choice() {
-		
 		this.choice = "";
-		this.done = false;
-		
 	}
 	
-	public Choice(String choice,boolean done) {
-		
+	public Choice(String text) {
+		String[] splitText = text.split("-");
+		this.choice = splitText[0];
+		this.result = Integer.parseInt(splitText[1]);
+	}
+	
+	public Choice(String choice,int result) {
 		this.choice = choice;
-		this.done = done;
-		
+		this.result = result;
 	}
 	
 	public String getChoice() {
@@ -24,21 +25,9 @@ public class Choice {
 		
 	}
 	
-	public boolean getDone() {
-		
-		return done;
-		
-	}
-	
 	public void setChoice(String choice) {
 		
 		this.choice = choice;
-		
-	}
-	
-	public void setDone(boolean done) {
-		
-		this.done = done;
 		
 	}
 	
