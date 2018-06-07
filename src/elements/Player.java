@@ -1,9 +1,9 @@
 package elements;
 
-import javafx.scene.image.Image;
+import java.util.ArrayList;
 
 public class Player {
-	protected Image surprised, scared, confused, angry, sad, depressed;
-	
+	protected int choiceSum;
+	protected ArrayList<Option> choices;
 	
 }
