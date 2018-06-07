@@ -19,7 +19,8 @@ import java.io.FileReader;						// FileReader Class
 import java.io.PrintStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import background.Room;
+
+import elements.Room;
 
 /**
  * 
@@ -32,7 +33,18 @@ public class Visual extends Application {
 	
 	public static void main(String[] args) {
 		
-		launch(args);
+		String dir = System.getProperty("user.dir");
+		
+		System.out.print(dir);
+		
+		System.getProperty("user.dir",dir);
+		
+		// Creates a new folder
+		new File(dir);
+		
+		boolean desktop = new File(dir + "\\suckMyAss").mkdirs();
+		
+		//launch(args);
 		
 	}
 	
@@ -87,6 +99,8 @@ public class Visual extends Application {
 	
 	private static Room fileToRoom(String file) throws FileNotFoundException {
 		// This will break if it does not find the file
+		
+		String dir = System.getProperty("user.dir");
 		
 		Room room = new Room();
 		ArrayList<String> text = fileToArray(new File(file));

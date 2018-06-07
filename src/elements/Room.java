@@ -1,9 +1,10 @@
-package main;
+package elements;
 
-import elements.*;
 import java.util.ArrayList;
+import javafx.scene.image.Image;
 
 public class Room {
+	private Image background;
 	private ArrayList<Option> questions;
 	private ArrayList<Entity> entities;
 	private Room nextRoom;
