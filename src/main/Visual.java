@@ -102,6 +102,7 @@ public class Visual extends Application {
 	 * Should always check for the file suckMyAss.txt (game initializer file)
 	 */
 	private static Instance fileToInstance(String file) throws FileNotFoundException {
+		File initalizerFile = new File(file);
 		
 		
 	}
