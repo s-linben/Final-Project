@@ -19,6 +19,7 @@ import java.io.FileReader;						// FileReader Class
 import java.io.PrintStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import elements.*;
 
 import elements.Room;
 
@@ -94,6 +95,14 @@ public class Visual extends Application {
 		
 		
 		//initialReader();
+		
+	}
+	
+	/*
+	 * Should always check for the file suckMyAss.txt (game initializer file)
+	 */
+	private static Instance fileToInstance(String file) throws FileNotFoundException {
+		
 		
 	}
 	

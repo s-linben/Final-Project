@@ -8,6 +8,7 @@ public class Instance {
 	private Room room;
 	private Instance nextInstance;
 	private String id;					// This is a string value of <Instance/Act #> + <Dialogue/Scene #>
+	private boolean complete;			// Use this later.
 	
 	public Instance() {
 		activeDialogue = null;
@@ -15,6 +16,7 @@ public class Instance {
 		room = null;
 		nextInstance = null;
 		id = "1a";
+		complete = false;
 	}
 	
 	public Instance(Dialogue activeDialogue,ArrayList<Entity> entities,Room room,Instance nextInstance) {
@@ -23,6 +25,7 @@ public class Instance {
 		this.room = room;
 		this.nextInstance = nextInstance;
 		this.id = "1a";							// Note: will never change unless you specify it
+		complete = false;
 	}
 	
 	public Dialogue getActiveDialogue() {
@@ -31,6 +34,10 @@ public class Instance {
 	
 	public ArrayList<Entity> getEntities() {
 		return entities;
+	}
+	
+	public Instance getNextInstance() {
+		return nextInstance;
 	}
 	
 	public void setId(String id) {

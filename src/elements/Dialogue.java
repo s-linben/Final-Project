@@ -9,7 +9,7 @@ public class Dialogue {
 	private Dialogue nextDialogue;
 	private int num;
 	
-	public Dialogue(Entity speakerID,String words) {
+	public Dialogue(int speakerID,String words) {
 		this.speakerID = speakerID;
 		this.words = words;
 		this.choice = null;
@@ -65,7 +65,7 @@ public class Dialogue {
 	}
 	
 	public String toString() {
-		return 
+		return speakerID + ":" + num;
 	}
 	
 }
