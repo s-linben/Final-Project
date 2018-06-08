@@ -17,7 +17,7 @@ public class Dialogue {
 		this.num = 0;
 	}
 	
-	public Entity getSpeaker() {
+	public int getSpeakerID() {
 		return speakerID;
 	}
 	
@@ -39,7 +39,7 @@ public class Dialogue {
 		return size;
 	}
 	
-	public void setSpeaker(int speakerID) {
+	public void setSpeakerID(int speakerID) {
 		this.speakerID = speakerID;
 	}
 	
