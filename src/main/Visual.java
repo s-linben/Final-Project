@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -21,8 +22,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import elements.*;
 
-import elements.Room;
-
 /**
  * 
  * This class is also the main class where everything is stored. 
@@ -31,6 +30,8 @@ import elements.Room;
  *
  */
 public class Visual extends Application {
+	public static final String INSTANCE = System.getProperty("user.dir") + "\\Instance";
+	public static final String ENTITY = System.getProperty("user.dir") + "\\entity";
 	
 	public static void main(String[] args) {
 		
@@ -102,9 +103,36 @@ public class Visual extends Application {
 	 * Should always check for the file suckMyAss.txt (game initializer file)
 	 */
 	private static Instance fileToInstance(String file) throws FileNotFoundException {
-		File initalizerFile = new File(file);
+		File initalizerFile = new File(INSTANCE);
+		ArrayList<String> instanceTextFiles = listFileForFolder(initalizerFile);
+		mergeSortInitializer(instanceTextFiles);
+		
+		for (int index = 0;index < instanceTextFiles.size();index++) {
+			
+			
+			
+		}
+		
+		Dialogue tempDialogue = new Dialogue();
+		
+		Instance tempInstance = new Instance();
+		return tempInstance;
+	}
+	
+	private static Instance fileToInstance(String textFileSource) {
 		
 		
+		
+	}
+	
+	private static ArrayList<String> listFileForFolder(final File folder) {
+		ArrayList<String> tempFileEntryList = new ArrayList<String>();
+		for (final File fileEntry : folder.listFiles()) {
+			if (!fileEntry.isDirectory()) {
+				tempFileEntryList.add(fileEntry.getName());
+			}
+		}
+		return tempFileEntryList;
 	}
 	
 	private static Room fileToRoom(String file) throws FileNotFoundException {
@@ -116,6 +144,114 @@ public class Visual extends Application {
 		ArrayList<String> text = fileToArray(new File(file));
 		
 		return room;
+	}
+	
+	public static void mergeSortInitializer(ArrayList<String> list) {
+		
+		String[] array = list.toArray(new String[list.size()]);
+		array = mergeSort(array);
+		list = new ArrayList<String>(Arrays.asList(array));
+		
+	}
+
+	public static String[] mergeSort(String[] array) {
+
+		/*
+		 * System.out.println("MergeSort\t");
+		 * 
+		 * for (int index = 0;index < array.length;index++) {
+		 * 
+		 * System.out.println(array[index]);
+		 * 
+		 * }
+		 */
+
+		if (array.length > 2) {
+
+			String[] left = Arrays.copyOfRange(array, 0, array.length / 2);
+			String[] right = Arrays.copyOfRange(array, left.length, array.length);
+
+			mergeSort(left);
+			mergeSort(right);
+
+			int leftCounter = 0;
+			int rightCounter = 0;
+			for (int index = 0; index < array.length; index++) {
+
+				/*
+				 * System.out.println("Left:" + leftCounter); System.out.println("Right:" +
+				 * rightCounter); System.out.println("Index:" + index);
+				 */
+
+				if (leftCounter == left.length) {
+
+					// System.out.println("left counter == left.length");
+
+					// Dump rest in
+
+					for (int tempInt = rightCounter; rightCounter < right.length; tempInt++) {
+
+						array[index] = right[tempInt];
+						index += 1;
+						rightCounter += 1;
+					}
+
+				} else if (rightCounter == right.length) {
+
+					// System.out.println("right counter == right.length");
+
+					// Dump rest in
+
+					for (int tempInt = leftCounter; leftCounter < left.length; tempInt++) {
+
+						array[index] = left[tempInt];
+						index += 1;
+						leftCounter += 1;
+					}
+					
+					// TODO: Check code
+				} else if (left[leftCounter].compareTo(right[rightCounter]) < 0) {
+
+					/*
+					 * System.out.println("left:" + left[leftCounter]); System.out.println("Right:"
+					 * + right[rightCounter]); System.out.println("Left is less than Right Var");
+					 */
+
+					array[index] = left[leftCounter];
+					leftCounter += 1;
+
+				} else {
+
+					/*
+					 * System.out.println("left:" + left[leftCounter]); System.out.println("Right:"
+					 * + right[rightCounter]); System.out.println("Right is less than Left Var");
+					 */
+
+					array[index] = right[rightCounter];
+					rightCounter += 1;
+
+				}
+
+			}
+
+		} else if (array.length == 2) {
+
+			// System.out.println("Double length array!!!");
+
+			if (array[1].compareTo(array[0]) < 0) {
+
+				String temp = array[1];
+				array[1] = array[0];
+				array[0] = temp;
+
+			}
+
+		}
+
+		// System.out.println();
+
+		return array;
+
 	}
 	
 	private static ArrayList<String> fileToArray(File file) throws FileNotFoundException {

@@ -2,20 +2,23 @@ package elements;
 
 import java.util.ArrayList;
 
+/*
+ * This should be stored in an array initialized of all the elements in order.
+ */
 public class Instance {
 	private Dialogue activeDialogue;
 	private ArrayList<Entity> entities;	// The integer of the Entities in here is the speaker ID
 	private Room room;
-	private Instance nextInstance;
-	private String id;					// This is a string value of <Instance/Act #> + <Dialogue/Scene #>
+	//private Instance nextInstance;
+	//private String id;					// This is a string value of <Instance/Act #> + <Dialogue/Scene #>
 	private boolean complete;			// Use this later.
 	
 	public Instance() {
 		activeDialogue = null;
 		entities = new ArrayList<Entity>();
 		room = null;
-		nextInstance = null;
-		id = "1a";
+		//nextInstance = null;
+		//id = "1a";
 		complete = false;
 	}
 	
@@ -23,8 +26,8 @@ public class Instance {
 		this.activeDialogue = activeDialogue;
 		this.entities = entities;
 		this.room = room;
-		this.nextInstance = nextInstance;
-		this.id = "1a";							// Note: will never change unless you specify it
+		//this.nextInstance = nextInstance;
+		//this.id = "1a";							// Note: will never change unless you specify it
 		complete = false;
 	}
 	
@@ -40,8 +43,15 @@ public class Instance {
 		return nextInstance;
 	}
 	
+	/*
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public void add(Instance nextInstance) {
+		this.nextInstance = nextInstance;
+		
+		
 	}
 	
 	public void add(Instance nextInstance) {
@@ -78,6 +88,11 @@ public class Instance {
 		} else {
 			this.nextInstance.setId("" + tempActId);
 		}
+	}
+	*/
+	
+	public void setNextDialogue() {
+		this.activeDialogue.next();
 	}
 	
 }

@@ -6,8 +6,7 @@ public class Dialogue {
 	private int speakerID;
 	private String words;
 	private Option choice;			// This will not always exist, but when it doesn it asks the question at the end
-	private Dialogue nextDialogue;
-	// private int num;
+	//private Dialogue nextDialogue;
 	private String ID;				// This is stored in the format of a fa abc and stuff
 	
 	public Dialogue(int speakerID,String words) {
@@ -15,7 +14,6 @@ public class Dialogue {
 		this.words = words;
 		this.choice = null;
 		this.nextDialogue = null;
-		// this.num = 0;
 	}
 	
 	public int getSpeakerID() {
@@ -98,12 +96,14 @@ public class Dialogue {
 		}
 	}
 	
-	public void remove() {
-		
+	public String toString() {
+		return ID;
 	}
 	
-	public String toString() {
-		return speakerID + ":" + num;
+	public Dialogue next() {
+		Dialogue tempDialogue = nextDialogue;
+		nextDialogue = null;
+		return tempDialogue;
 	}
 	
 }

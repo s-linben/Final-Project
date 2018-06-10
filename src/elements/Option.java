@@ -4,6 +4,7 @@ public class Option {
 	protected String prompt;	// The prompt that will ask the player in the game
 	protected Choice[] choices;	// 3 or more choice that the player can make
 	protected int result;		// Can only be -1, 0, or 1
+	protected double chance;	// TODO: Implement this stuff
 	
 	public Option() {
 		prompt = "";
