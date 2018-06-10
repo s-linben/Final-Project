@@ -103,13 +103,18 @@ public class Visual extends Application {
 	 * Should always check for the file suckMyAss.txt (game initializer file)
 	 */
 	private static Instance fileToInstance(String file) throws FileNotFoundException {
+		Instance tempInstace = new Instance();
+		
 		File initalizerFile = new File(INSTANCE);
+		File entityFile = new File(ENTITY);
 		ArrayList<String> instanceTextFiles = listFileForFolder(initalizerFile);
+		ArrayList<String> entityTextFiles = listFileForFolder(entityFile);
 		mergeSortInitializer(instanceTextFiles);
 		
 		for (int index = 0;index < instanceTextFiles.size();index++) {
 			
-			
+			// Removes the ".txt" part of the name of the files
+			instanceTextFiles.set(index,instanceTextFiles.get(index).substring(0,instanceTextFiles.get(index).length() - 4));
 			
 		}
 		
@@ -117,12 +122,6 @@ public class Visual extends Application {
 		
 		Instance tempInstance = new Instance();
 		return tempInstance;
-	}
-	
-	private static Instance fileToInstance(String textFileSource) {
-		
-		
-		
 	}
 	
 	private static ArrayList<String> listFileForFolder(final File folder) {
@@ -144,6 +143,45 @@ public class Visual extends Application {
 		ArrayList<String> text = fileToArray(new File(file));
 		
 		return room;
+	}
+	
+	public static Dialogue folderToDialogue(File folder) {
+		ArrayList<String> dialogueFiles = listFileForFolder(folder);
+		mergeSortInitializer(dialogueFiles);
+		
+		
+		for (int index = 0;index < dialogueFiles.size();index++) {
+			
+		}
+		
+		
+		Dialogue initialDialogue = new Dialogue();
+		
+		
+		Dialogue tempDialogue - new Dialogue();
+	}
+	
+	public static ArrayList<String> textfileToStringArray(File file) throws FileNotFoundException {
+		ArrayList<String> tempList = new ArrayList<String>();
+		FileReader reader = new FileReader(file);
+		Scanner tokenBasedReader = new Scanner(reader);
+		
+		while (tokenBasedReader.hasNextLine()) {
+			tempList.add(tokenBasedReader.nextLine());
+		}
+		
+		tokenBasedReader.close();
+		return tempList;
+	}
+	
+	public static void textfileToStringArray(File file,ArrayList<String> arrayList) throws FileNotFoundException {
+		FileReader reader = new FileReader(file);
+		Scanner tokenBasedReader = new Scanner(reader);
+		
+		while (tokenBasedReader.hasNextLine()) {
+			arrayList.add(tokenBasedReader.nextLine());
+		}
+		tokenBasedReader.close();
 	}
 	
 	public static void mergeSortInitializer(ArrayList<String> list) {

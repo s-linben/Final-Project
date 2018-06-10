@@ -6,7 +6,7 @@ public class Dialogue {
 	private int speakerID;
 	private String words;
 	private Option choice;			// This will not always exist, but when it doesn it asks the question at the end
-	//private Dialogue nextDialogue;
+	private Dialogue nextDialogue;	// A little debatable on this issue
 	private String ID;				// This is stored in the format of a fa abc and stuff
 	
 	public Dialogue(int speakerID,String words) {

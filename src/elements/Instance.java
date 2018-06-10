@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Instance {
 	private Dialogue activeDialogue;
-	private ArrayList<Entity> entities;	// The integer of the Entities in here is the speaker ID
+	private ArrayList<Entity> entities;	// The integer of the Entities in here is the speaker ID, though feels like this should be independent of this class
 	private Room room;
 	//private Instance nextInstance;
 	//private String id;					// This is a string value of <Instance/Act #> + <Dialogue/Scene #>
