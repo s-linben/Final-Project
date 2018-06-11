@@ -32,7 +32,8 @@ import elements.*;
 public class Visual extends Application {
 	public static final String INSTANCE = System.getProperty("user.dir") + "\\Instance";
 	public static final String ENTITY = System.getProperty("user.dir") + "\\entity";
-
+	public static final String ROOM = System.getProperty("user.dir") + "\\Room";
+	
 	public static void main(String[] args) {
 
 		String dir = System.getProperty("user.dir");
@@ -51,11 +52,14 @@ public class Visual extends Application {
 	}
 
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage stage) throws FileNotFoundException {
 		// The Stage variable is the window it first initializes
 
-		Room room_1;
-		initializer();
+		ArrayList<Room> roomList = new ArrayList<Room>();
+		ArrayList<Entity> entityList = new ArrayList<Entity>();
+		ArrayList<Instance> instanceList = new ArrayList<Instance>();
+		
+		initializer(roomList,entityList,instanceList);
 
 		stage.setTitle("The Trip");
 		// The name of the game and the window now
@@ -79,21 +83,28 @@ public class Visual extends Application {
 
 	}
 
-	private static void initializer(String file) throws FileNotFoundException {
+	private static void initializer(ArrayList<Room> roomList,ArrayList<Entity> entityList,ArrayList<Instance> instanceList) throws FileNotFoundException {
 		// This needs to return the room
-
-		Room room = fileToRoom("Potato");
-
-		ArrayList<ArrayList<String>> input = new ArrayList<ArrayList<String>>();
-
-		File in;
-		File out;
-		String filename;
-
-		// initialReader();
 		
+		// TODO: Check the order of these, make sure they're in the right order
+		ArrayList<String> roomFileArray = listFileForFolder(new File(ROOM));
+		ArrayList<String> entityFileArray = listFileForFolder(new File(ENTITY));
+		ArrayList<String> instanceFileArray = listFileForFolder(new File(INSTANCE));
 		
-
+		for (int roomArrayIndex = 0;roomArrayIndex < roomFileArray.size();roomArrayIndex++) {
+			ArrayList<String> tempList = textfileToStringArray(new File(roomFileArray.get(roomArrayIndex)));
+			roomList.add(new Room(tempList.get(0)));
+		}
+		
+		for (int entityArrayIndex = 0;entityArrayIndex < entityFileArray.size();entityArrayIndex++) {
+			ArrayList<String> tempList = textfileToStringArray(new File(entityFileArray.get(entityArrayIndex)));
+			entityList.add(new Entity(tempList.get(0)));
+		}
+		
+		for (int instanceArrayIndex = 0;instanceArrayIndex < instanceFileArray.size();instanceArrayIndex++) {
+			instanceList.add(fileToInstance(instanceFileArray.get(0)));
+		}
+		
 	}
 
 	/*
@@ -123,8 +134,6 @@ public class Visual extends Application {
 		String tempInstanceFile = file.substring(0,file.length() - 4);
 
 		Dialogue tempDialogue = folderToDialogue(new File("dialogue_" + tempInstanceFile));
-
-		// TODO: continue after this
 		
 		/*
 		 * Need to do entity list in this, should be <Entity ID>:<xcoord>:<ycoord>; *repeats after this
@@ -144,7 +153,7 @@ public class Visual extends Application {
 			instanceEntityList.add(new ShorthandEntities(tempIntArray[1],tempIntArray[2],tempIntArray[0]));
 		}
 		
-		Instance tempInstance = new Instance();
+		Instance tempInstance = new Instance(tempDialogue,instanceEntityList,Integer.parseInt(instanceFileArrayList.get(1)));
 		return tempInstance;
 	}
 
@@ -158,6 +167,7 @@ public class Visual extends Application {
 		return tempFileEntryList;
 	}
 
+	/*
 	private static Room fileToRoom(String file) throws FileNotFoundException {
 		// This will break if it does not find the file
 
@@ -168,6 +178,7 @@ public class Visual extends Application {
 
 		return room;
 	}
+	*/
 
 	public static Dialogue folderToDialogue(File folder) throws FileNotFoundException {
 		ArrayList<String> dialogueFiles = listFileForFolder(folder);

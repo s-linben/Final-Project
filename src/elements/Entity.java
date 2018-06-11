@@ -3,12 +3,12 @@ package elements;
 import javafx.scene.image.Image;
 
 public class Entity {
-	protected Point location;
+	//protected int x,y;
 	protected Image image;
-	protected boolean active;
+	//protected boolean active;
 	
-	public Entity() {
-		
+	public Entity(String image) {
+		this.image = new Image(image);
 	}
 	
 	public Entity(Image image) {
@@ -23,9 +23,9 @@ public class Entity {
 		
 	}
 	
-	public void setImage(Image image) {
+	public void setImage(String image) {
 		
-		this.image = image;
+		this.image = new Image(image);
 		
 	}
 	

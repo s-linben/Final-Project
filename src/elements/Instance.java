@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Instance {
 	private Dialogue activeDialogue;
 	private ArrayList<ShorthandEntities> entities;	// The integer of the Entities in here is the speaker ID, though feels like this should be independent of this class
-	private Room room;
+	private int room;
 	//private Instance nextInstance;
 	//private String id;					// This is a string value of <Instance/Act #> + <Dialogue/Scene #>
 	private boolean complete;			// Use this later.
@@ -22,7 +22,7 @@ public class Instance {
 		complete = false;
 	}
 	
-	public Instance(Dialogue activeDialogue,ArrayList<ShorthandEntities> entities,Room room,Instance nextInstance) {
+	public Instance(Dialogue activeDialogue,ArrayList<ShorthandEntities> entities,int room) {
 		this.activeDialogue = activeDialogue;
 		this.entities = entities;
 		this.room = room;
@@ -55,6 +55,7 @@ public class Instance {
 		
 	}
 	
+	//TODO: REMOVE!!!
 	public void add(Instance nextInstance) {
 		this.nextInstance = nextInstance;
 		//int tempActId = Character.getNumericValue(id.charAt(0));

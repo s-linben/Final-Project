@@ -6,9 +6,17 @@ import javafx.scene.image.Image;
 public class Room {
 	private Image background;
 	
-	public Room() {
-		//questions = new ArrayList<Option>();
-		//entities = new ArrayList<Entity>();
+	// This only takes a specific link to the image
+	public Room(String image) {
+		background = new Image(image);
+	}
+	
+	public Image getBackground() {
+		return background;
+	}
+	
+	public void setBackground(String image) {
+		background = new Image(image);
 	}
 	
 }
