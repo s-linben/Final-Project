@@ -8,12 +8,21 @@ public class Dialogue {
 	private Option choice;			// This will not always exist, but when it doesn it asks the question at the end
 	private Dialogue nextDialogue;	// A little debatable on this issue
 	private String ID;				// This is stored in the format of a fa abc and stuff
+	private boolean choiceTrue;		// The actual choice should be stored in a separate folder with the dialogue
+	
+	public Dialogue(String ID,int speakerID,String words,boolean choiceTrue) {
+		this.ID = ID;
+		this.speakerID = speakerID;
+		this.words = words;
+		this.choiceTrue = choiceTrue;
+	}
 	
 	public Dialogue(int speakerID,String words) {
 		this.speakerID = speakerID;
 		this.words = words;
 		this.choice = null;
 		this.nextDialogue = null;
+		this.choiceTrue = false;
 	}
 	
 	public int getSpeakerID() {

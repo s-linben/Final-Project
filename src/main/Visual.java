@@ -5,18 +5,18 @@ import java.util.Arrays;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.stage.Stage;						// IDK what this is for
-import javafx.scene.Group;						// IDK what this is for
-import javafx.scene.Scene;						// IDK what this is for
-import javafx.scene.canvas.Canvas;				// JavaFX canvas class
-import javafx.scene.canvas.GraphicsContext;		// IDK what this is for
-import javafx.scene.image.Image;				// JavaFX importing pictures and stuff
-import javafx.scene.paint.Color;				// This is for color
-import javafx.scene.text.Font;					// Remove this once you delete the practice stuff, useless
-import javafx.scene.text.FontWeight;			// Remove this as well, because don't need automated text
+import javafx.stage.Stage; // IDK what this is for
+import javafx.scene.Group; // IDK what this is for
+import javafx.scene.Scene; // IDK what this is for
+import javafx.scene.canvas.Canvas; // JavaFX canvas class
+import javafx.scene.canvas.GraphicsContext; // IDK what this is for
+import javafx.scene.image.Image; // JavaFX importing pictures and stuff
+import javafx.scene.paint.Color; // This is for color
+import javafx.scene.text.Font; // Remove this once you delete the practice stuff, useless
+import javafx.scene.text.FontWeight; // Remove this as well, because don't need automated text
 import javafx.scene.input.KeyEvent;
-import java.io.File;							// File Class
-import java.io.FileReader;						// FileReader Class
+import java.io.File; // File Class
+import java.io.FileReader; // FileReader Class
 import java.io.PrintStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -24,7 +24,7 @@ import elements.*;
 
 /**
  * 
- * This class is also the main class where everything is stored. 
+ * This class is also the main class where everything is stored.
  * 
  * @author Benjamin Lin
  *
@@ -32,98 +32,94 @@ import elements.*;
 public class Visual extends Application {
 	public static final String INSTANCE = System.getProperty("user.dir") + "\\Instance";
 	public static final String ENTITY = System.getProperty("user.dir") + "\\entity";
-	
+
 	public static void main(String[] args) {
-		
+
 		String dir = System.getProperty("user.dir");
-		
+
 		System.out.print(dir);
-		
-		System.getProperty("user.dir",dir);
-		
+
+		System.getProperty("user.dir", dir);
+
 		// Creates a new folder
 		new File(dir);
-		
+
 		boolean desktop = new File(dir + "\\suckMyAss").mkdirs();
-		
-		//launch(args);
-		
+
+		// launch(args);
+
 	}
-	
+
 	@Override
 	public void start(Stage stage) {
 		// The Stage variable is the window it first initializes
-		
+
 		Room room_1;
 		initializer();
-		
+
 		stage.setTitle("The Trip");
 		// The name of the game and the window now
-		
+
 		Group root = new Group();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		
-		Canvas canvas = new Canvas(1000,1000);
+
+		Canvas canvas = new Canvas(1000, 1000);
 		root.getChildren().add(canvas);
-		
+
 		stage.show();
-		
+
 		new AnimationTimer() {
-			
+
 			public void handle(long currentNanoTime) {
-				
-				
-				
+
 			}
-			
+
 		}.start();
-		
+
 	}
-	
+
 	private static void initializer(String file) throws FileNotFoundException {
 		// This needs to return the room
-		
+
 		Room room = fileToRoom("Potato");
-		
+
 		ArrayList<ArrayList<String>> input = new ArrayList<ArrayList<String>>();
-		
+
 		File in;
 		File out;
 		String filename;
-		
-		
-		
-		
-		//initialReader();
-		
+
+		// initialReader();
+
 	}
-	
+
 	/*
 	 * Should always check for the file suckMyAss.txt (game initializer file)
 	 */
 	private static Instance fileToInstance(String file) throws FileNotFoundException {
 		Instance tempInstace = new Instance();
-		
+
 		File initalizerFile = new File(INSTANCE);
 		File entityFile = new File(ENTITY);
 		ArrayList<String> instanceTextFiles = listFileForFolder(initalizerFile);
 		ArrayList<String> entityTextFiles = listFileForFolder(entityFile);
 		mergeSortInitializer(instanceTextFiles);
-		
-		for (int index = 0;index < instanceTextFiles.size();index++) {
-			
+
+		for (int index = 0; index < instanceTextFiles.size(); index++) {
+
 			// Removes the ".txt" part of the name of the files
-			instanceTextFiles.set(index,instanceTextFiles.get(index).substring(0,instanceTextFiles.get(index).length() - 4));
-			
+			instanceTextFiles.set(index,
+					instanceTextFiles.get(index).substring(0, instanceTextFiles.get(index).length() - 4));
+
 		}
-		
+
 		Dialogue tempDialogue = new Dialogue();
-		
+
 		Instance tempInstance = new Instance();
 		return tempInstance;
 	}
-	
+
 	private static ArrayList<String> listFileForFolder(final File folder) {
 		ArrayList<String> tempFileEntryList = new ArrayList<String>();
 		for (final File fileEntry : folder.listFiles()) {
@@ -133,63 +129,73 @@ public class Visual extends Application {
 		}
 		return tempFileEntryList;
 	}
-	
+
 	private static Room fileToRoom(String file) throws FileNotFoundException {
 		// This will break if it does not find the file
-		
+
 		String dir = System.getProperty("user.dir");
-		
+
 		Room room = new Room();
 		ArrayList<String> text = fileToArray(new File(file));
-		
+
 		return room;
 	}
-	
+
 	public static Dialogue folderToDialogue(File folder) {
 		ArrayList<String> dialogueFiles = listFileForFolder(folder);
 		mergeSortInitializer(dialogueFiles);
 		
-		
 		for (int index = 0;index < dialogueFiles.size();index++) {
+			
+			// Removes the ".txt" part of the name of the files
+			dialogueFiles.set(index,dialogueFiles.get(index).substring(0,dialogueFiles.get(index).length() - 4));
 			
 		}
 		
+		ArrayList<String> tempArray = textfileToStringArray(new File(dialogueFiles.get(0) + ".txt"));
 		
-		Dialogue initialDialogue = new Dialogue();
+		// Dialogue ID : Speaker ID : Words : choiceTrue (should be the same ID as the dialogue, but with "_choice" tacked on at the end)
+		Dialogue initialDialogue = new Dialogue(dialogueFiles.get(0),Integer.parseInt(tempArray.get(0)),tempArray.get(1),Boolean.parseBoolean(tempArray.get(2)));
 		
+		// Skip the first one
+		for (int index = 1;index < dialogueFiles.size();index++) {
+			File tempTextfile = new File(dialogueFiles.get(index));
+			tempArray = textfileToStringArray(tempTextfile);
+			initialDialogue.add(new Dialogue(dialogueFiles.get(index),Integer.parseInt(tempArray.get(0)),tempArray.get(1),Boolean.parseBoolean(tempArray.get(2))))
+		}
 		
-		Dialogue tempDialogue - new Dialogue();
+		return initialDialogue;
 	}
-	
+
 	public static ArrayList<String> textfileToStringArray(File file) throws FileNotFoundException {
 		ArrayList<String> tempList = new ArrayList<String>();
 		FileReader reader = new FileReader(file);
 		Scanner tokenBasedReader = new Scanner(reader);
-		
+
 		while (tokenBasedReader.hasNextLine()) {
 			tempList.add(tokenBasedReader.nextLine());
 		}
-		
+
 		tokenBasedReader.close();
 		return tempList;
 	}
-	
-	public static void textfileToStringArray(File file,ArrayList<String> arrayList) throws FileNotFoundException {
+
+	public static void textfileToStringArray(File file, ArrayList<String> arrayList) throws FileNotFoundException {
 		FileReader reader = new FileReader(file);
 		Scanner tokenBasedReader = new Scanner(reader);
-		
+
 		while (tokenBasedReader.hasNextLine()) {
 			arrayList.add(tokenBasedReader.nextLine());
 		}
 		tokenBasedReader.close();
 	}
-	
+
 	public static void mergeSortInitializer(ArrayList<String> list) {
-		
+
 		String[] array = list.toArray(new String[list.size()]);
 		array = mergeSort(array);
 		list = new ArrayList<String>(Arrays.asList(array));
-		
+
 	}
 
 	public static String[] mergeSort(String[] array) {
@@ -246,7 +252,7 @@ public class Visual extends Application {
 						index += 1;
 						leftCounter += 1;
 					}
-					
+
 					// TODO: Check code
 				} else if (left[leftCounter].compareTo(right[rightCounter]) < 0) {
 
@@ -291,24 +297,24 @@ public class Visual extends Application {
 		return array;
 
 	}
-	
+
 	private static ArrayList<String> fileToArray(File file) throws FileNotFoundException {
-		
+
 		ArrayList<String> array = new ArrayList<String>();
-		
+
 		FileReader fileRead = new FileReader(file);
 		Scanner input = new Scanner(fileRead);
-		
+
 		while (input.hasNextLine()) {
-			
+
 			array.add(input.nextLine());
-			
+
 		}
-		
+
 		input.close();
-		
+
 		return new ArrayList<String>();
-		
+
 	}
 
 }
