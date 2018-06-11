@@ -91,6 +91,8 @@ public class Visual extends Application {
 		String filename;
 
 		// initialReader();
+		
+		
 
 	}
 
@@ -99,23 +101,49 @@ public class Visual extends Application {
 	 */
 	private static Instance fileToInstance(String file) throws FileNotFoundException {
 		Instance tempInstace = new Instance();
-
-		File initalizerFile = new File(INSTANCE);
-		File entityFile = new File(ENTITY);
+		
+		/*
+		//File initalizerFile = new File(INSTANCE);
+		//File entityFile = new File(ENTITY);
 		ArrayList<String> instanceTextFiles = listFileForFolder(initalizerFile);
-		ArrayList<String> entityTextFiles = listFileForFolder(entityFile);
+		//ArrayList<String> entityTextFiles = listFileForFolder(entityFile);
 		mergeSortInitializer(instanceTextFiles);
 
 		for (int index = 0; index < instanceTextFiles.size(); index++) {
 
 			// Removes the ".txt" part of the name of the files
-			instanceTextFiles.set(index,
-					instanceTextFiles.get(index).substring(0, instanceTextFiles.get(index).length() - 4));
+			instanceTextFiles.set(index,instanceTextFiles.get(index).substring(0, instanceTextFiles.get(index).length() - 4));
 
 		}
+		*/
+		
+		File tempFile = new File(file);
+		
+		// Removes the txt of the instance file
+		String tempInstanceFile = file.substring(0,file.length() - 4);
 
-		Dialogue tempDialogue = new Dialogue();
+		Dialogue tempDialogue = folderToDialogue(new File("dialogue_" + tempInstanceFile));
 
+		// TODO: continue after this
+		
+		/*
+		 * Need to do entity list in this, should be <Entity ID>:<xcoord>:<ycoord>; *repeats after this
+		 */
+		
+		ArrayList<String> instanceFileArrayList = textfileToStringArray(tempFile);
+		ArrayList<ShorthandEntities> instanceEntityList = new ArrayList<ShorthandEntities>();
+		
+		String[] entityArray = instanceFileArrayList.get(0).split(";");
+		for (int index = 0;index < entityArray.length;index++) {
+			String[] tempArray = entityArray[index].split(":");
+			int[] tempIntArray = new int[tempArray.length];
+			for (int entityIndex = 0;entityIndex < 3;entityIndex++) {
+				// This turns all the Strings into integer values, because we only need 3 integer values per shorthandEntity
+				tempIntArray[entityIndex] = Integer.parseInt(tempArray[entityIndex]);
+			}
+			instanceEntityList.add(new ShorthandEntities(tempIntArray[1],tempIntArray[2],tempIntArray[0]));
+		}
+		
 		Instance tempInstance = new Instance();
 		return tempInstance;
 	}
@@ -141,7 +169,7 @@ public class Visual extends Application {
 		return room;
 	}
 
-	public static Dialogue folderToDialogue(File folder) {
+	public static Dialogue folderToDialogue(File folder) throws FileNotFoundException {
 		ArrayList<String> dialogueFiles = listFileForFolder(folder);
 		mergeSortInitializer(dialogueFiles);
 		
@@ -161,7 +189,7 @@ public class Visual extends Application {
 		for (int index = 1;index < dialogueFiles.size();index++) {
 			File tempTextfile = new File(dialogueFiles.get(index));
 			tempArray = textfileToStringArray(tempTextfile);
-			initialDialogue.add(new Dialogue(dialogueFiles.get(index),Integer.parseInt(tempArray.get(0)),tempArray.get(1),Boolean.parseBoolean(tempArray.get(2))))
+			initialDialogue.add(new Dialogue(dialogueFiles.get(index),Integer.parseInt(tempArray.get(0)),tempArray.get(1),Boolean.parseBoolean(tempArray.get(2))));
 		}
 		
 		return initialDialogue;
