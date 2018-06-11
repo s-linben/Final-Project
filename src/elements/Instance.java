@@ -13,6 +13,7 @@ public class Instance {
 	//private String id;					// This is a string value of <Instance/Act #> + <Dialogue/Scene #>
 	private boolean complete;			// Use this later.
 	
+	/*
 	public Instance() {
 		activeDialogue = null;
 		entities = new ArrayList<ShorthandEntities>();
@@ -21,6 +22,7 @@ public class Instance {
 		//id = "1a";
 		complete = false;
 	}
+	*/
 	
 	public Instance(Dialogue activeDialogue,ArrayList<ShorthandEntities> entities,int room) {
 		this.activeDialogue = activeDialogue;
@@ -55,7 +57,6 @@ public class Instance {
 		
 	}
 	
-	//TODO: REMOVE!!!
 	public void add(Instance nextInstance) {
 		this.nextInstance = nextInstance;
 		//int tempActId = Character.getNumericValue(id.charAt(0));

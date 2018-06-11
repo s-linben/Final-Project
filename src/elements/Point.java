@@ -1,5 +1,7 @@
 package elements;
 
+// USELESS!!!
+
 public class Point {
 	private int x, y;	// This is the X and Y coordiates of the target
 	
