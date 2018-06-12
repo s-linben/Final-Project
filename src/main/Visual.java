@@ -11,9 +11,11 @@ import javafx.scene.Scene; // IDK what this is for
 import javafx.scene.canvas.Canvas; // JavaFX canvas class
 import javafx.scene.canvas.GraphicsContext; // IDK what this is for
 import javafx.scene.image.Image; // JavaFX importing pictures and stuff
-import javafx.scene.paint.Color; // This is for color
-import javafx.scene.text.Font; // Remove this once you delete the practice stuff, useless
-import javafx.scene.text.FontWeight; // Remove this as well, because don't need automated text
+//import javafx.scene.paint.Color; // This is for color
+//import javafx.scene.text.Font; // Remove this once you delete the practice stuff, useless
+//import javafx.scene.text.FontWeight; // Remove this as well, because don't need automated text
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.input.KeyEvent;
 import java.io.File; // File Class
 import java.io.FileReader; // FileReader Class
@@ -36,6 +38,7 @@ public class Visual extends Application {
 	public static final String ROOM = System.getProperty("user.dir") + "\\src\\source\\Room";
 	public static final String DIALOGUE = System.getProperty("user.dir") + "\\src\\source\\Dialogue";
 	public static final String SPRITES = System.getProperty("user.dir") + "\\src\\source\\Sprites";
+	public static final String AUDIO = System.getProperty("user.dir") + "\\src\\source\\Audio";
 	
 	public static void main(String[] args) {
 
@@ -74,7 +77,7 @@ public class Visual extends Application {
 						change = new Boolean("true");
 					}
 				});
-				*/
+		*/
 		
 		scene.setOnKeyPressed(
 				new EventHandler<KeyEvent>() {
