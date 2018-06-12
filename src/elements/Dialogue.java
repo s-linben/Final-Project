@@ -7,11 +7,9 @@ public class Dialogue {
 	private String words;
 	//private Option choice;			// This will not always exist, but when it doesn it asks the question at the end
 	private Dialogue nextDialogue;	// A little debatable on this issue
-	private String ID;				// This is stored in the format of a fa abc and stuff
-	//private boolean choiceTrue;		// The actual choice should be stored in a separate folder with the dialogue
-	private int choiceID;
-	
-	public Dialogue(String ID,int speakerID)
+	private String ID;				// This is stored in the format of a fa abc and stuff - also the choice ID
+	private boolean choiceTrue;		// The actual choice should be stored in a separate folder with the dialogue
+	//private int choiceID;
 	
 	public Dialogue(String ID,int speakerID,String words,boolean choiceTrue) {
 		this.ID = ID;
@@ -117,5 +115,28 @@ public class Dialogue {
 		nextDialogue = null;
 		return tempDialogue;
 	}
+	// TODO: Finish this for the Save FIle
+	/*
+	public int findID(String ID) {
+		if (this.ID.equals(ID)) {
+			return 0;
+		} else if (nextDialogue ==)
+		
+		
+		else {
+			nextDialogue.findID(ID,1);
+		}
+	}
 	
+	public int findID(String ID,int counter) {
+		if (this.ID.equals(ID)) {
+			return counter;
+		} else {
+			if (nextDialogue == null) {
+				return -1;
+			}
+			nextDialogue.findID(ID,counter + 1);
+		}
+	}
+	*/
 }

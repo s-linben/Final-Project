@@ -164,7 +164,8 @@ public class Visual extends Application {
 		
 		// Reads all the dialogue from an array of "a" - "f", so only 26 lines, though can be extended if you add double characters
 		// TODO: extend the number of lines per thing
-		Dialogue tempDialogue = folderToDialogue(new File(DIALOGUE + "\\dialogue_" + tempInstanceFile));
+		//Dialogue tempDialogue = folderToDialogue(new File(DIALOGUE + "\\dialogue_" + tempInstanceFile));
+		Dialogue tempDialogue = fileToDialogue(new File(DIALOGUE + "\\" + tempInstanceFile + ".txt"));
 		
 		/*
 		 * Need to do entity list in this, should be <Entity ID>:<xcoord>:<ycoord>; *repeats after this
@@ -232,6 +233,20 @@ public class Visual extends Application {
 			File tempTextfile = new File(dialogueFiles.get(index));
 			tempArray = textfileToStringArray(tempTextfile);
 			initialDialogue.add(new Dialogue(dialogueFiles.get(index),Integer.parseInt(tempArray.get(0)),tempArray.get(1),Boolean.parseBoolean(tempArray.get(2))));
+		}
+		
+		return initialDialogue;
+	}
+	
+	public static Dialogue fileToDialogue(File textfile) throws FileNotFoundException {
+		ArrayList<String> dialogueFile = textfileToStringArray(textfile);
+		
+		String[] tempArray = dialogueFile.get(0).split(":");
+		Dialogue initialDialogue = new Dialogue(tempArray[0],Integer.parseInt(tempArray[1]),tempArray[2],Boolean.parseBoolean(tempArray[3]));
+		
+		for (int index = 1;index < dialogueFile.size();index++) {
+			tempArray = dialogueFile.get(index).split(":");
+			initialDialogue.add(new Dialogue(tempArray[0],Integer.parseInt(tempArray[1]),tempArray[2],Boolean.parseBoolean(tempArray[3])));
 		}
 		
 		return initialDialogue;
