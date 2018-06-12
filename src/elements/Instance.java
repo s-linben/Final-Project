@@ -41,6 +41,10 @@ public class Instance {
 		return entities;
 	}
 	
+	public int getRoom() {
+		return room;
+	}
+	
 	/*
 	public Instance getNextInstance() {
 		return nextInstance;

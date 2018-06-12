@@ -17,6 +17,8 @@ import javafx.scene.image.Image; // JavaFX importing pictures and stuff
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
 import java.io.File; // File Class
 import java.io.FileReader; // FileReader Class
 import java.io.PrintStream;
@@ -41,6 +43,8 @@ public class Visual extends Application {
 	public static final String AUDIO = System.getProperty("user.dir") + "\\src\\source\\Audio";
 	public static final String GAMENAME = "Reverse Odyssey";
 	
+	// NOTE: for any word subtract 97 from the char and it will become a image to print out.
+	
 	public static void main(String[] args) {
 
 		
@@ -63,11 +67,15 @@ public class Visual extends Application {
 		stage.setTitle(GAMENAME);
 		// The name of the game and the window now
 
+		BorderPane bp = new BorderPane();
+		bp.setPadding(new Insets(10,50,50,50));
+		
 		Group root = new Group();
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(bp);
 		stage.setScene(scene);
+		stage.setResizable(false);
 
-		Canvas canvas = new Canvas(1000, 1000);
+		Canvas canvas = new Canvas();
 		root.getChildren().add(canvas);
 		
 		Boolean change = new Boolean(false);
@@ -101,15 +109,22 @@ public class Visual extends Application {
 					}
 				});
 		
+		// So this is where all the images go through to get printed out
 		GraphicsContext graphic = canvas.getGraphicsContext2D();
 		
 		//stage.show();
+		
+		Integer counter = new Integer(0);
 
 		new AnimationTimer() {
 
 			public void handle(long currentNanoTime) {
 				
 				graphic.clearRect(0,0,1000,1000);
+				
+				// Draws the background of the instance
+				graphic.drawImage(roomList.get(instanceList.get(counter).getRoom()).getBackground(),0,0);
+				
 				
 				
 			}
