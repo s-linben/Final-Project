@@ -35,6 +35,7 @@ public class Visual extends Application {
 	public static final String ENTITY = System.getProperty("user.dir") + "\\src\\source\\Entity";
 	public static final String ROOM = System.getProperty("user.dir") + "\\src\\source\\Room";
 	public static final String DIALOGUE = System.getProperty("user.dir") + "\\src\\source\\Dialogue";
+	public static final String SPRITES = System.getProperty("user.dir") + "\\src\\source\\Sprites";
 	
 	public static void main(String[] args) {
 
@@ -127,7 +128,7 @@ public class Visual extends Application {
 		
 		for (int entityArrayIndex = 0;entityArrayIndex < entityFileArray.size();entityArrayIndex++) {
 			ArrayList<String> tempList = textfileToStringArray(new File(entityFileArray.get(entityArrayIndex)));
-			entityList.add(new Entity(tempList.get(0)));
+			entityList.add(new Entity(SPRITES + tempList.get(0),tempList.get(1)));
 		}
 		
 		for (int instanceArrayIndex = 0;instanceArrayIndex < instanceFileArray.size();instanceArrayIndex++) {

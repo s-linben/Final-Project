@@ -5,10 +5,13 @@ import java.util.List;
 public class Dialogue {
 	private int speakerID;
 	private String words;
-	private Option choice;			// This will not always exist, but when it doesn it asks the question at the end
+	//private Option choice;			// This will not always exist, but when it doesn it asks the question at the end
 	private Dialogue nextDialogue;	// A little debatable on this issue
 	private String ID;				// This is stored in the format of a fa abc and stuff
-	private boolean choiceTrue;		// The actual choice should be stored in a separate folder with the dialogue
+	//private boolean choiceTrue;		// The actual choice should be stored in a separate folder with the dialogue
+	private int choiceID;
+	
+	public Dialogue(String ID,int speakerID)
 	
 	public Dialogue(String ID,int speakerID,String words,boolean choiceTrue) {
 		this.ID = ID;
