@@ -41,6 +41,10 @@ public class Instance {
 		return entities;
 	}
 	
+	public ShorthandEntities getEntity(int index) {
+		return entities.get(index);
+	}
+	
 	public int getRoom() {
 		return room;
 	}

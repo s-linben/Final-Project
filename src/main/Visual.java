@@ -68,7 +68,7 @@ public class Visual extends Application {
 		// The name of the game and the window now
 
 		BorderPane bp = new BorderPane();
-		bp.setPadding(new Insets(10,50,50,50));
+		bp.setPadding(new Insets(1024,1024,1024,1024));
 		
 		Group root = new Group();
 		Scene scene = new Scene(bp);
@@ -120,10 +120,18 @@ public class Visual extends Application {
 
 			public void handle(long currentNanoTime) {
 				
-				graphic.clearRect(0,0,1000,1000);
+				graphic.clearRect(0,0,2000,2000);
 				
 				// Draws the background of the instance
 				graphic.drawImage(roomList.get(instanceList.get(counter).getRoom()).getBackground(),0,0);
+				
+				// All characters printed
+				for (int index = 0;index < instanceList.get(counter).getEntities().size();index++) {
+					graphic.drawImage(entityList.get(instanceList.get(counter).getEntity(index).getEntityID()).getImage(),instanceList.get(counter).getEntity(index).getXcoord(),instanceList.get(counter).getEntity(index).getYcoord());
+				}
+				
+				// The random bar for text
+				graphic.drawImage(entityList.get(0).getImage(),0,744);
 				
 				
 				
@@ -132,6 +140,83 @@ public class Visual extends Application {
 		}.start();
 		
 		stage.show();
+		
+	}
+	
+	private static Image[] wordProcessor(String text) {
+		// TODO: Finish word processing
+		String[] array = stringCutter(new String[] {text});
+		ArrayList<Image> imageList = new ArrayList<Image>();
+		
+		for (int index = 0;index < array.length;index++) {
+			
+			for (int secIndex = 0;secIndex < array[index].length();secIndex++) {
+				imageArray
+			}
+			
+			
+		}
+		
+	}
+	
+	public static String[] stringCutter(String[] text) {
+		int extension = 0;
+		int[] indvExtension = new int[text.length];
+		
+		// Traverses all the lines in the String
+		for (int index = 0; index < text.length; index++) {
+			
+			// If one of the Strings in the array is greater than 30, then this method will run
+			if ((((double) text[index].length()) / 30) - 1 > 0.0) {
+				
+				// This records the total rows that this String needs
+				indvExtension[index] = (int) Math.ceil(((double) text[index].length()) / 30);
+
+				extension += (indvExtension[index] - 1);
+			} else {
+				
+				indvExtension[index] = 1;
+				
+			}
+
+		}
+		
+		// If there is no need for an extension, then this it short circuits and returns it as it is.
+		if (extension == 0) {
+			return text;
+		}
+
+		String[] rInfo = new String[text.length + extension];
+		int indxCount = 0;
+
+		for (int index = 0; index < text.length; index++) {
+
+			if (indvExtension[index] > 0) {
+
+				for (int repeats = 0; repeats < indvExtension[index]; repeats++) {
+
+					if (repeats == indvExtension[index] - 1) {
+
+						rInfo[indxCount] = text[index].substring( 30 * repeats, text[index].length());
+
+					} else {
+						rInfo[indxCount] = text[index].substring(30 * repeats, 30 + (30 * repeats));
+					}
+
+					indxCount++;
+
+				}
+
+			} else {
+
+				rInfo[indxCount] = text[index];
+				indxCount++;
+
+			}
+
+		}
+		
+		return rInfo;
 		
 	}
 
@@ -145,17 +230,17 @@ public class Visual extends Application {
 		ArrayList<String> songFileArray = listFileForFolder(new File(AUDIO));
 		
 		for (int roomArrayIndex = 0;roomArrayIndex < roomFileArray.size();roomArrayIndex++) {
-			ArrayList<String> tempList = textfileToStringArray(new File(roomFileArray.get(roomArrayIndex)));
+			ArrayList<String> tempList = textfileToStringArray(new File(ROOM + roomFileArray.get(roomArrayIndex)));
 			roomList.add(new Room(tempList.get(0)));
 		}
 		
 		for (int entityArrayIndex = 0;entityArrayIndex < entityFileArray.size();entityArrayIndex++) {
-			ArrayList<String> tempList = textfileToStringArray(new File(entityFileArray.get(entityArrayIndex)));
+			ArrayList<String> tempList = textfileToStringArray(new File(ENTITY + entityFileArray.get(entityArrayIndex)));
 			entityList.add(new Entity(SPRITES + tempList.get(0),tempList.get(1)));
 		}
 		
 		for (int instanceArrayIndex = 0;instanceArrayIndex < instanceFileArray.size();instanceArrayIndex++) {
-			instanceList.add(fileToInstance(instanceFileArray.get(0)));
+			instanceList.add(fileToInstance(INSTANCE + instanceFileArray.get(0)));
 		}
 		
 		for (int songArrayIndex = 0;songArrayIndex < songFileArray.size();songArrayIndex++) {
@@ -189,8 +274,7 @@ public class Visual extends Application {
 		// Removes the txt of the instance file
 		String tempInstanceFile = file.substring(0,file.length() - 4);
 		
-		// Reads all the dialogue from an array of "a" - "f", so only 26 lines, though can be extended if you add double characters
-		// TODO: extend the number of lines per thing
+		// IDK what this is
 		//Dialogue tempDialogue = folderToDialogue(new File(DIALOGUE + "\\dialogue_" + tempInstanceFile));
 		Dialogue tempDialogue = fileToDialogue(new File(DIALOGUE + "\\" + tempInstanceFile + ".txt"));
 		
