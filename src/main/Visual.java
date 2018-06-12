@@ -30,24 +30,15 @@ import elements.*;
  *
  */
 public class Visual extends Application {
-	public static final String INSTANCE = System.getProperty("user.dir") + "\\Instance";
-	public static final String ENTITY = System.getProperty("user.dir") + "\\entity";
-	public static final String ROOM = System.getProperty("user.dir") + "\\Room";
+	// These are lists of all the folders of all the main assets
+	public static final String INSTANCE = System.getProperty("user.dir") + "\\src\\source\\Instance";
+	public static final String ENTITY = System.getProperty("user.dir") + "\\src\\source\\Entity";
+	public static final String ROOM = System.getProperty("user.dir") + "\\src\\source\\Room";
+	public static final String DIALOGUE = System.getProperty("user.dir") + "\\src\\source\\Dialogue";
 	
 	public static void main(String[] args) {
 
-		String dir = System.getProperty("user.dir");
-
-		System.out.print(dir);
-
-		System.getProperty("user.dir", dir);
-
-		// Creates a new folder
-		new File(dir);
-
-		boolean desktop = new File(dir + "\\suckMyAss").mkdirs();
-
-		// launch(args);
+		launch(args);
 
 	}
 
@@ -70,17 +61,55 @@ public class Visual extends Application {
 
 		Canvas canvas = new Canvas(1000, 1000);
 		root.getChildren().add(canvas);
-
-		stage.show();
+		
+		Boolean change = new Boolean(false);
+		
+		ArrayList<String> input = new ArrayList<String>();
+		
+		/*
+		scene.setOnMouseClicked(
+				new EventHandler() {
+					public void handle(MouseEvent e) {
+						change = new Boolean("true");
+					}
+				});
+				*/
+		
+		scene.setOnKeyPressed(
+				new EventHandler<KeyEvent>() {
+					public void handle(KeyEvent e) {
+						String code = e.getCode().toString();
+						if (!input.contains(code)) {
+							input.add(code);
+						}
+					}
+				});
+		
+		scene.setOnKeyReleased(
+				new EventHandler<KeyEvent>() {
+					public void handle(KeyEvent e) {
+						String code = e.getCode().toString();
+						input.remove(code);
+					}
+				});
+		
+		GraphicsContext graphic = canvas.getGraphicsContext2D();
+		
+		//stage.show();
 
 		new AnimationTimer() {
 
 			public void handle(long currentNanoTime) {
-
+				
+				graphic.clearRect(0,0,1000,1000);
+				
+				
 			}
 
 		}.start();
-
+		
+		stage.show();
+		
 	}
 
 	private static void initializer(ArrayList<Room> roomList,ArrayList<Entity> entityList,ArrayList<Instance> instanceList) throws FileNotFoundException {
@@ -126,12 +155,15 @@ public class Visual extends Application {
 		}
 		*/
 		
+		// Creates a new file
 		File tempFile = new File(file);
 		
 		// Removes the txt of the instance file
 		String tempInstanceFile = file.substring(0,file.length() - 4);
-
-		Dialogue tempDialogue = folderToDialogue(new File("dialogue_" + tempInstanceFile));
+		
+		// Reads all the dialogue from an array of "a" - "f", so only 26 lines, though can be extended if you add double characters
+		// TODO: extend the number of lines per thing
+		Dialogue tempDialogue = folderToDialogue(new File(DIALOGUE + "\\dialogue_" + tempInstanceFile));
 		
 		/*
 		 * Need to do entity list in this, should be <Entity ID>:<xcoord>:<ycoord>; *repeats after this
