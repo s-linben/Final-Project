@@ -1,30 +1,36 @@
 package main;
 
+import java.io.File; // File Class
+import java.io.FileNotFoundException;
+import java.io.FileReader; // FileReader Class
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Iterator;
+
+import elements.Audio;
+import elements.Dialogue;
+import elements.Entity;
+import elements.Instance;
+import elements.Room;
+import elements.ShorthandEntities;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.stage.Stage; // IDK what this is for
+import javafx.geometry.Insets;
 import javafx.scene.Group; // IDK what this is for
 import javafx.scene.Scene; // IDK what this is for
 import javafx.scene.canvas.Canvas; // JavaFX canvas class
 import javafx.scene.canvas.GraphicsContext; // IDK what this is for
 import javafx.scene.image.Image; // JavaFX importing pictures and stuff
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.media.MediaView;
+import javafx.stage.Stage; // IDK what this is for
+
 //import javafx.scene.paint.Color; // This is for color
 //import javafx.scene.text.Font; // Remove this once you delete the practice stuff, useless
 //import javafx.scene.text.FontWeight; // Remove this as well, because don't need automated text
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.geometry.Insets;
-import java.io.File; // File Class
-import java.io.FileReader; // FileReader Class
-import java.io.PrintStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import elements.*;
 
 /**
  * 
@@ -42,6 +48,9 @@ public class Visual extends Application {
 	public static final String SPRITES = System.getProperty("user.dir") + "\\src\\source\\Sprites";
 	public static final String AUDIO = System.getProperty("user.dir") + "\\src\\source\\Audio";
 	public static final String GAMENAME = "Reverse Odyssey";
+	
+	static final MediaView VIEW = new MediaView();	// IDK what this does
+	Iterator<String> itr;							// IDK what this does
 	
 	// NOTE: for any word subtract 97 from the char and it will become a image to print out.
 	
