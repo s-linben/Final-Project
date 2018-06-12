@@ -39,9 +39,12 @@ public class Visual extends Application {
 	public static final String DIALOGUE = System.getProperty("user.dir") + "\\src\\source\\Dialogue";
 	public static final String SPRITES = System.getProperty("user.dir") + "\\src\\source\\Sprites";
 	public static final String AUDIO = System.getProperty("user.dir") + "\\src\\source\\Audio";
+	public static final String GAMENAME = "Reverse Odyssey";
 	
 	public static void main(String[] args) {
 
+		
+		
 		launch(args);
 
 	}
@@ -53,10 +56,11 @@ public class Visual extends Application {
 		ArrayList<Room> roomList = new ArrayList<Room>();
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		ArrayList<Instance> instanceList = new ArrayList<Instance>();
+		ArrayList<Audio> songList = new ArrayList<Audio>();
 		
-		initializer(roomList,entityList,instanceList);
+		initializer(roomList,entityList,instanceList,songList);
 
-		stage.setTitle("The Trip");
+		stage.setTitle(GAMENAME);
 		// The name of the game and the window now
 
 		Group root = new Group();
@@ -116,13 +120,14 @@ public class Visual extends Application {
 		
 	}
 
-	private static void initializer(ArrayList<Room> roomList,ArrayList<Entity> entityList,ArrayList<Instance> instanceList) throws FileNotFoundException {
+	private static void initializer(ArrayList<Room> roomList,ArrayList<Entity> entityList,ArrayList<Instance> instanceList,ArrayList<Audio> mediaList) throws FileNotFoundException {
 		// This needs to return the room
 		
 		// TODO: Check the order of these, make sure they're in the right order
 		ArrayList<String> roomFileArray = listFileForFolder(new File(ROOM));
 		ArrayList<String> entityFileArray = listFileForFolder(new File(ENTITY));
 		ArrayList<String> instanceFileArray = listFileForFolder(new File(INSTANCE));
+		ArrayList<String> songFileArray = listFileForFolder(new File(AUDIO));
 		
 		for (int roomArrayIndex = 0;roomArrayIndex < roomFileArray.size();roomArrayIndex++) {
 			ArrayList<String> tempList = textfileToStringArray(new File(roomFileArray.get(roomArrayIndex)));
@@ -136,6 +141,10 @@ public class Visual extends Application {
 		
 		for (int instanceArrayIndex = 0;instanceArrayIndex < instanceFileArray.size();instanceArrayIndex++) {
 			instanceList.add(fileToInstance(instanceFileArray.get(0)));
+		}
+		
+		for (int songArrayIndex = 0;songArrayIndex < songFileArray.size();songArrayIndex++) {
+			mediaList.add(new Audio(AUDIO + songFileArray.get(songArrayIndex)));
 		}
 		
 	}
