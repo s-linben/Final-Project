@@ -31,6 +31,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage; // IDK what this is for
+import javafx.stage.StageStyle;
 
 //import javafx.scene.paint.Color; // This is for color
 //import javafx.scene.text.Font; // Remove this once you delete the practice stuff, useless
@@ -83,6 +84,8 @@ public class Visual extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		// The Stage variable is the window it first initializes
+		
+		stage.initStyle(StageStyle.UNDECORATED);
 
 		// TODO: move these out of the method
 		/* 
@@ -100,15 +103,16 @@ public class Visual extends Application {
 		// The name of the game and the window now
 
 		// Testing out some windows that won't change, so you can't just resize it however you want.
-		BorderPane bp = new BorderPane();
-		bp.setPadding(new Insets(1024,1024,1024,1024));
+		//BorderPane bp = new BorderPane();
+		//bp.setPadding(new Insets(1024,1024,1024,1024));
 		
 		Group root = new Group();
-		Scene scene = new Scene(bp);
+		//Scene scene = new Scene(bp);
+		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setResizable(false);
 
-		Canvas canvas = new Canvas();
+		Canvas canvas = new Canvas(1920,1080);
 		root.getChildren().add(canvas);
 		
 		Boolean change = new Boolean(false);
@@ -148,6 +152,8 @@ public class Visual extends Application {
 		//stage.show();
 		
 		Integer counter = new Integer(0);
+		
+		graphic.drawImage(entityList.get(0).getImage(),0,0);
 
 		new AnimationTimer() {
 
@@ -164,7 +170,7 @@ public class Visual extends Application {
 				}
 				
 				// The random bar for text
-				graphic.drawImage(entityList.get(0).getImage(),0,744);
+				graphic.drawImage(entityList.get(0).getImage(),0,0);
 				
 				
 				
@@ -569,6 +575,7 @@ public class Visual extends Application {
 
 	}
 
+	/*
 	private static ArrayList<String> fileToArray(File file) throws FileNotFoundException {
 
 		ArrayList<String> array = new ArrayList<String>();
@@ -587,5 +594,6 @@ public class Visual extends Application {
 		return new ArrayList<String>();
 
 	}
+	*/
 
 }
