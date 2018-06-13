@@ -26,6 +26,7 @@ import javafx.scene.image.Image; // JavaFX importing pictures and stuff
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.MediaView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage; // IDK what this is for
 
 //import javafx.scene.paint.Color; // This is for color
@@ -41,11 +42,13 @@ import javafx.stage.Stage; // IDK what this is for
  */
 public class Visual extends Application {
 	// These are lists of all the folders of all the main assets
+	// TODO: Use an Enum for this???
 	public static final String INSTANCE = System.getProperty("user.dir") + "\\src\\source\\Instance";
 	public static final String ENTITY = System.getProperty("user.dir") + "\\src\\source\\Entity";
 	public static final String ROOM = System.getProperty("user.dir") + "\\src\\source\\Room";
 	public static final String DIALOGUE = System.getProperty("user.dir") + "\\src\\source\\Dialogue";
 	public static final String SPRITES = System.getProperty("user.dir") + "\\src\\source\\Sprites";
+	public static final String SPRITESURL = "file:src/source/Sprites";
 	public static final String AUDIO = System.getProperty("user.dir") + "\\src\\source\\Audio";
 	public static final String GAMENAME = "Reverse Odyssey";
 	
@@ -70,9 +73,9 @@ public class Visual extends Application {
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		ArrayList<Instance> instanceList = new ArrayList<Instance>();
 		ArrayList<Audio> songList = new ArrayList<Audio>();
-		
+		System.out.println("Array Lists mado");
 		initializer(roomList,entityList,instanceList,songList);
-
+		System.out.println("WORKS");
 		stage.setTitle(GAMENAME);
 		// The name of the game and the window now
 
@@ -152,19 +155,21 @@ public class Visual extends Application {
 		
 	}
 	
-	private static Image[] wordProcessor(String text) {
+	private static Image[][] wordProcessor(String text) {
 		// TODO: Finish word processing
 		String[] array = stringCutter(new String[] {text});
-		ArrayList<Image> imageList = new ArrayList<Image>();
+		Image[][] imageArray = new Image[array.length][30];
 		
 		for (int index = 0;index < array.length;index++) {
 			
 			for (int secIndex = 0;secIndex < array[index].length();secIndex++) {
-				imageArray
+				//imageArray
+				imageArray[index][secIndex] = new Image(SPRITES + "\\Extra\\" + array[index].charAt(secIndex) + ".png");
 			}
 			
-			
 		}
+		
+		return imageArray;
 		
 	}
 	
@@ -239,17 +244,30 @@ public class Visual extends Application {
 		ArrayList<String> songFileArray = listFileForFolder(new File(AUDIO));
 		
 		for (int roomArrayIndex = 0;roomArrayIndex < roomFileArray.size();roomArrayIndex++) {
-			ArrayList<String> tempList = textfileToStringArray(new File(ROOM + roomFileArray.get(roomArrayIndex)));
-			roomList.add(new Room(tempList.get(0)));
+			System.out.println("Room #" + roomArrayIndex + " initializing");
+			ArrayList<String> tempList = textfileToStringArray(new File(ROOM + "\\" + roomFileArray.get(roomArrayIndex)));
+			
+			System.out.println(SPRITESURL + tempList.get(0));
+			roomList.add(new Room(SPRITESURL + tempList.get(0)));
+			System.out.println("Room #" + roomArrayIndex + " initialized");
 		}
 		
 		for (int entityArrayIndex = 0;entityArrayIndex < entityFileArray.size();entityArrayIndex++) {
-			ArrayList<String> tempList = textfileToStringArray(new File(ENTITY + entityFileArray.get(entityArrayIndex)));
-			entityList.add(new Entity(SPRITES + tempList.get(0),tempList.get(1)));
+			System.out.println("Entity #" + entityArrayIndex + " initializing");
+			try {
+				ArrayList<String> tempList = textfileToStringArray(new File(ENTITY + "\\" + entityFileArray.get(entityArrayIndex)));
+				entityList.add(new Entity(SPRITESURL + tempList.get(0),tempList.get(1)));
+			} catch (Exception e) {
+				System.out.println("ERROR IN PROCESSING!!!");
+				e.printStackTrace();
+			}
+			
+			
+			System.out.println("Entity #" + entityArrayIndex + " initialized");
 		}
 		
 		for (int instanceArrayIndex = 0;instanceArrayIndex < instanceFileArray.size();instanceArrayIndex++) {
-			instanceList.add(fileToInstance(INSTANCE + instanceFileArray.get(0)));
+			instanceList.add(fileToInstance(INSTANCE + "\\" + instanceFileArray.get(0)));
 		}
 		
 		for (int songArrayIndex = 0;songArrayIndex < songFileArray.size();songArrayIndex++) {
@@ -258,9 +276,6 @@ public class Visual extends Application {
 		
 	}
 
-	/*
-	 * Should always check for the file suckMyAss.txt (game initializer file)
-	 */
 	private static Instance fileToInstance(String file) throws FileNotFoundException {
 		/*
 		//File initalizerFile = new File(INSTANCE);

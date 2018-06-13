@@ -1,2 +1,2 @@
-Extra\\textbox.png
+/Extra/textbox.png
 textbox

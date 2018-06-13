@@ -1,2 +1,2 @@
-//Test_Images//red.png
+/Test_Images/red.png
 redTest

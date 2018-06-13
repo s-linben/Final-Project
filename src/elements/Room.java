@@ -1,6 +1,5 @@
 package elements;
 
-import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Room {
@@ -8,6 +7,7 @@ public class Room {
 	
 	// This only takes a specific link to the image
 	public Room(String image) {
+		
 		background = new Image(image);
 	}
 	

@@ -1,2 +1,2 @@
-//Test_Images//blue.png
+/Test_Images/blue.png
 blueTest
