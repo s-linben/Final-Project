@@ -20,7 +20,8 @@ public class Audio {
 	}
 	
 	public Audio(String textFile) throws FileNotFoundException {
-		this.song = new Media(new File(textFile).toURI().toString());
+		//this.song = new Media(new File(textFile).toURI().toString());
+		this.song = new Media(textFile);
 	}
 	
 	public Media getSong() {

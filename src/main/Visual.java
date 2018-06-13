@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Iterator;
+import java.net.URL;
+import java.nio.file.Paths;
 
 import elements.Audio;
 import elements.Dialogue;
@@ -25,6 +27,7 @@ import javafx.scene.canvas.GraphicsContext; // IDK what this is for
 import javafx.scene.image.Image; // JavaFX importing pictures and stuff
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage; // IDK what this is for
@@ -35,7 +38,7 @@ import javafx.stage.Stage; // IDK what this is for
 
 /**
  * 
- * This class is also the main class where everything is stored.
+ * This class is what 
  * 
  * @author Benjamin Lin
  *
@@ -52,33 +55,51 @@ public class Visual extends Application {
 	public static final String AUDIO = System.getProperty("user.dir") + "\\src\\source\\Audio";
 	public static final String GAMENAME = "Reverse Odyssey";
 	
+	// Testing out some code I found on stackOverflow
 	static final MediaView VIEW = new MediaView();	// IDK what this does
 	Iterator<String> itr;							// IDK what this does
 	
-	// NOTE: for any word subtract 97 from the char and it will become a image to print out.
+	// NOTE: (Word -> word images) for any word subtract 97 from the char and it will become a image to print out.
+	// The base integer value of the char "a" is 97
 	
+	/*
+	 * This is the main method of the program. It immediately starts off by calling the Javafx Applicaiton libraries.
+	 * This means that it will run 3 methods, init (to initialize), start(Stage) (mandatory and needed to run the program, and
+	 * stop(), which ends the program
+	 */
 	public static void main(String[] args) {
-
 		
-		
+		// This is used to run and call the Javafx visuals
 		launch(args);
 
 	}
 
+	/*
+	 * This is the visual component, read the tutorial I posted to get a feel for the code
+	 * 
+	 * (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
-	public void start(Stage stage) throws FileNotFoundException {
+	public void start(Stage stage) throws Exception {
 		// The Stage variable is the window it first initializes
 
+		// TODO: move these out of the method
+		/* 
+		 * For some odd reason, primitive types don't work in this method, because I think the method doesn't loop here, 
+		 * so use Classes instead. (I read the tutorial and it mentioned this)
+		 */
 		ArrayList<Room> roomList = new ArrayList<Room>();
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		ArrayList<Instance> instanceList = new ArrayList<Instance>();
-		ArrayList<Audio> songList = new ArrayList<Audio>();
+		ArrayList<Media> songList = new ArrayList<Media>();
 		System.out.println("Array Lists mado");
 		initializer(roomList,entityList,instanceList,songList);
 		System.out.println("WORKS");
 		stage.setTitle(GAMENAME);
 		// The name of the game and the window now
 
+		// Testing out some windows that won't change, so you can't just resize it however you want.
 		BorderPane bp = new BorderPane();
 		bp.setPadding(new Insets(1024,1024,1024,1024));
 		
@@ -152,6 +173,17 @@ public class Visual extends Application {
 		}.start();
 		
 		stage.show();
+		
+	}
+	
+	/*
+	 * This is totally useless and won't do anything, but it's just there for some odd reason I wanted to find it and read the 
+	 * javadoc, though I might use it. In all honesty, I don't really believe I will.
+	 * 
+	 * (non-Javadoc)
+	 * @see javafx.application.Application#init()
+	 */
+	public void init() {
 		
 	}
 	
@@ -234,7 +266,7 @@ public class Visual extends Application {
 		
 	}
 
-	private static void initializer(ArrayList<Room> roomList,ArrayList<Entity> entityList,ArrayList<Instance> instanceList,ArrayList<Audio> mediaList) throws FileNotFoundException {
+	private static void initializer(ArrayList<Room> roomList,ArrayList<Entity> entityList,ArrayList<Instance> instanceList,ArrayList<Media> mediaList) throws FileNotFoundException {
 		// This needs to return the room
 		
 		// TODO: Check the order of these, make sure they're in the right order
@@ -258,7 +290,7 @@ public class Visual extends Application {
 				ArrayList<String> tempList = textfileToStringArray(new File(ENTITY + "\\" + entityFileArray.get(entityArrayIndex)));
 				entityList.add(new Entity(SPRITESURL + tempList.get(0),tempList.get(1)));
 			} catch (Exception e) {
-				System.out.println("ERROR IN PROCESSING!!!");
+				System.out.println("Error in Processing Entity Data");
 				e.printStackTrace();
 			}
 			
@@ -267,12 +299,23 @@ public class Visual extends Application {
 		}
 		
 		for (int instanceArrayIndex = 0;instanceArrayIndex < instanceFileArray.size();instanceArrayIndex++) {
-			instanceList.add(fileToInstance(INSTANCE + "\\" + instanceFileArray.get(0)));
+			System.out.println(instanceFileArray.get(0));
+			instanceList.add(fileToInstance(instanceFileArray.get(instanceArrayIndex)));
 		}
 		
+		System.out.println("instances completed");
+		
 		for (int songArrayIndex = 0;songArrayIndex < songFileArray.size();songArrayIndex++) {
-			mediaList.add(new Audio(AUDIO + songFileArray.get(songArrayIndex)));
+			//System.out.println();
+			//System.out.println(songArrayIndex + " - " + songFileArray.get(songArrayIndex) + " - " + AUDIO);
+			String fileLoc = AUDIO + "\\" + songFileArray.get(songArrayIndex);
+			//File test = new File(fileLoc);
+			//System.out.println(test.exists());
+			
+			mediaList.add(new Media(Paths.get(fileLoc).toUri().toString()));
 		}
+		
+		System.out.println("Sound initialized");
 		
 	}
 
@@ -292,15 +335,21 @@ public class Visual extends Application {
 		}
 		*/
 		
+		System.out.println(file);
+		
 		// Creates a new file
-		File tempFile = new File(file);
+		File tempFile = new File(INSTANCE + "\\" + file);
 		
 		// Removes the txt of the instance file
 		String tempInstanceFile = file.substring(0,file.length() - 4);
 		
+		System.out.println(DIALOGUE + "\\" + tempInstanceFile + ".txt");
+		
 		// IDK what this is
 		//Dialogue tempDialogue = folderToDialogue(new File(DIALOGUE + "\\dialogue_" + tempInstanceFile));
 		Dialogue tempDialogue = fileToDialogue(new File(DIALOGUE + "\\" + tempInstanceFile + ".txt"));
+		
+		System.out.println("Dialogue initialized");
 		
 		/*
 		 * Need to do entity list in this, should be <Entity ID>:<xcoord>:<ycoord>; *repeats after this
@@ -308,6 +357,8 @@ public class Visual extends Application {
 		
 		ArrayList<String> instanceFileArrayList = textfileToStringArray(tempFile);
 		ArrayList<ShorthandEntities> instanceEntityList = new ArrayList<ShorthandEntities>();
+		
+		System.out.println("Instance File Array List Made");
 		
 		String[] entityArray = instanceFileArrayList.get(0).split(";");
 		for (int index = 0;index < entityArray.length;index++) {
