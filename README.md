@@ -17,3 +17,6 @@ I like some of these documentations on how to use JavaFX. Note: Please don't sue
 
 
 [Java Docs Javafx.Scene] (https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Scene.html).
+
+
+[Regex Expressions] (https://www.tutorialspoint.com/java/java_regular_expressions.htm)
