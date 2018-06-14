@@ -154,7 +154,8 @@ public class Visual extends Application {
 		
 		//stage.show();
 		
-		Integer counter = new Integer(0);
+		Int instanceCounter = new Int(0);
+		//Int dialogueCounter = new Int(0);
 		
 		graphic.drawImage(entityList.get(0).getImage(),0,0);
 
@@ -165,19 +166,20 @@ public class Visual extends Application {
 				graphic.clearRect(0,0,stage.getWidth(),stage.getHeight());
 				
 				// Draws the background of the instance
-				graphic.drawImage(roomList.get(instanceList.get(counter).getRoom()).getBackground(),0,0);
+				graphic.drawImage(roomList.get(instanceList.get(instanceCounter.getInteger()).getRoom()).getBackground(),0,0);
 				
 				// All characters printed
-				for (int index = 0;index < instanceList.get(counter).getEntities().size();index++) {
-					graphic.drawImage(entityList.get(instanceList.get(counter).getEntity(index).getEntityID()).getImage(),instanceList.get(counter).getEntity(index).getXcoord(),instanceList.get(counter).getEntity(index).getYcoord());
+				for (int index = 0;index < instanceList.get(instanceCounter.getInteger()).getEntities().size();index++) {
+					graphic.drawImage(entityList.get(instanceList.get(instanceCounter.getInteger()).getEntity(index).getEntityID()).getImage(),instanceList.get(instanceCounter.getInteger()).getEntity(index).getXcoord(),instanceList.get(instanceCounter.getInteger()).getEntity(index).getYcoord());
 				}
 				
 				// The random bar for text
 				//graphic.drawImage(entityList.get(0).getImage(),0,0);
-				if (counter == 0) {
+				if (instanceCounter.getInteger() == 0) {
 					printInMiddle(entityList.get(4).getImage(),(int) (stage.getHeight() - (entityList.get(4).getImage().getHeight())),graphic,stage);
 				}
 				
+				/*
 				//System.out.println("Woof");
 				String test = "oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof";
 				Image[][] imageTest = wordProcessor(test);
@@ -188,8 +190,25 @@ public class Visual extends Application {
 						graphic.drawImage(imageTest[in1][in2],480 + (32 * in2),(stage.getHeight() - 360) + (48 * in1));
 					}
 				}
+				*/
 				
-				
+				printInTextBox(instanceList.get(instanceCounter.getInteger()).getActiveDialogue().getWords(), graphic,
+						stage);
+
+				if (input.contains("SPACE")) {
+					if (instanceList.get(instanceCounter.getInteger()).getActiveDialogue().getNextDialogue() == null) {
+
+						if (instanceList.size() == instanceCounter.getInteger()) {
+							stage.close();
+						} else {
+							instanceCounter.increment();
+						}
+					} else {
+
+						instanceList.get(instanceCounter.getInteger()).setNextDialogue();
+					}
+				}
+
 			}
 
 		}.start();
@@ -211,8 +230,14 @@ public class Visual extends Application {
 		//stage.initModality(Modality.APPLICATION_MODAL);
 	}
 	
-	public void printInTextBox(String[] text) {
+	public void printInTextBox(String text,GraphicsContext graphic,Stage stage) {
+		Image[][] imageText = wordProcessor(text);
 		
+		for (int in1 = 0;in1 < imageText.length;in1++) {
+			for (int in2 = 0;in2 < imageText[in1].length;in2++) {
+				graphic.drawImage(imageText[in1][in2],480 + (32 * in2),(stage.getHeight() - 360) + (48 * in1));
+			}
+		}
 	}
 	
 	public void printInMiddle(Image image,int y,GraphicsContext gc,Stage stage) {

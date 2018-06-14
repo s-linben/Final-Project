@@ -103,7 +103,7 @@ public class Instance {
 	*/
 	
 	public void setNextDialogue() {
-		this.activeDialogue.next();
+		this.activeDialogue = activeDialogue.next();
 	}
 	
 }
