@@ -159,7 +159,7 @@ public class Visual extends Application {
 
 			public void handle(long currentNanoTime) {
 				
-				graphic.clearRect(0,0,2000,2000);
+				graphic.clearRect(0,0,stage.getWidth(),stage.getHeight());
 				
 				// Draws the background of the instance
 				graphic.drawImage(roomList.get(instanceList.get(counter).getRoom()).getBackground(),0,0);
@@ -170,8 +170,21 @@ public class Visual extends Application {
 				}
 				
 				// The random bar for text
-				graphic.drawImage(entityList.get(0).getImage(),0,0);
+				//graphic.drawImage(entityList.get(0).getImage(),0,0);
+				if (counter == 0) {
+					printInMiddle(entityList.get(0).getImage(),(int) (stage.getHeight() - (entityList.get(0).getImage().getHeight())),graphic,stage);
+				}
 				
+				System.out.println("Woof");
+				String test = "oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof";
+				Image[][] imageTest = wordProcessor(test);
+				
+				System.out.println("Words processed");
+				for (int in1 = 0;in1 < imageTest.length;in1++) {
+					for (int in2 = 0;in2 < imageTest[in1].length;in2++) {
+						graphic.drawImage(imageTest[in1][in2],480 + (32 * in2),(stage.getHeight() - 360) + (48 * in1));
+					}
+				}
 				
 				
 			}
@@ -193,16 +206,32 @@ public class Visual extends Application {
 		
 	}
 	
+	public void printInTextBox(String[] text) {
+		
+	}
+	
+	public void printInMiddle(Image image,int y,GraphicsContext gc,Stage stage) {
+		int tempWidth = (int) image.getWidth() / 2;
+		// int tempHeight = (int) image.getHeight() / 2;
+		
+		// int stageHeight = (int) stage.getHeight() / 2;
+		int stageWidth = (int) stage.getWidth() / 2;
+		
+		gc.drawImage(image,stageWidth - tempWidth,y);
+		
+	}
+	
 	private static Image[][] wordProcessor(String text) {
 		// TODO: Finish word processing
 		String[] array = stringCutter(new String[] {text});
+		System.out.println("String cut");
 		Image[][] imageArray = new Image[array.length][30];
 		
 		for (int index = 0;index < array.length;index++) {
 			
 			for (int secIndex = 0;secIndex < array[index].length();secIndex++) {
 				//imageArray
-				imageArray[index][secIndex] = new Image(SPRITES + "\\Extra\\" + array[index].charAt(secIndex) + ".png");
+				imageArray[index][secIndex] = new Image(SPRITESURL + "/Extra/" + array[index].charAt(secIndex) + ".png");
 			}
 			
 		}
@@ -218,7 +247,7 @@ public class Visual extends Application {
 		// Traverses all the lines in the String
 		for (int index = 0; index < text.length; index++) {
 			
-			// If one of the Strings in the array is greater than 30, then this method will run
+			// If one of the Strings in the array is greater than 98, then this method will run
 			if ((((double) text[index].length()) / 30) - 1 > 0.0) {
 				
 				// This records the total rows that this String needs
@@ -249,10 +278,10 @@ public class Visual extends Application {
 
 					if (repeats == indvExtension[index] - 1) {
 
-						rInfo[indxCount] = text[index].substring( 30 * repeats, text[index].length());
+						rInfo[indxCount] = text[index].substring((30) * repeats, text[index].length());
 
 					} else {
-						rInfo[indxCount] = text[index].substring(30 * repeats, 30 + (30 * repeats));
+						rInfo[indxCount] = text[index].substring((30) * repeats, (30) + ((30) * repeats));
 					}
 
 					indxCount++;
@@ -290,6 +319,9 @@ public class Visual extends Application {
 			System.out.println("Room #" + roomArrayIndex + " initialized");
 		}
 		
+		// Note: the file retrieval of an image is slightly different from a Media file.
+		// media files can be derived from anywhere on the computer, however, image files on the
+		// other hand can only be found in the directory, so the URI is different from the media files
 		for (int entityArrayIndex = 0;entityArrayIndex < entityFileArray.size();entityArrayIndex++) {
 			System.out.println("Entity #" + entityArrayIndex + " initializing");
 			try {
