@@ -141,11 +141,17 @@ public class Visual extends Application {
 					}
 				});
 		
+		Int actionCounter = new Int(0);
+		
 		scene.setOnKeyReleased(
 				new EventHandler<KeyEvent>() {
 					public void handle(KeyEvent e) {
 						String code = e.getCode().toString();
 						input.remove(code);
+						if (input.contains(code)) {
+							actionCounter.decrement();
+					
+						}
 					}
 				});
 		
@@ -195,16 +201,16 @@ public class Visual extends Application {
 				printInTextBox(instanceList.get(instanceCounter.getInteger()).getActiveDialogue().getWords(), graphic,
 						stage);
 
-				if (input.contains("SPACE")) {
+				if (input.contains("SPACE") && actionCounter.getInteger() == 0) {
+					actionCounter.increment();
 					if (instanceList.get(instanceCounter.getInteger()).getActiveDialogue().getNextDialogue() == null) {
 
-						if (instanceList.size() == instanceCounter.getInteger()) {
+						if (instanceList.size() == instanceCounter.getInteger() + 1) {
 							stage.close();
 						} else {
 							instanceCounter.increment();
 						}
 					} else {
-
 						instanceList.get(instanceCounter.getInteger()).setNextDialogue();
 					}
 				}

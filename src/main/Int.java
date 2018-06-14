@@ -19,4 +19,8 @@ public class Int {
 		integer++;
 	}
 	
+	public void decrement() {
+		integer--;
+	}
+	
 }
