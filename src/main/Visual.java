@@ -31,6 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage; // IDK what this is for
@@ -88,9 +89,13 @@ public class Visual extends Application {
 		ArrayList<Entity> entityList = new ArrayList<Entity>();
 		ArrayList<Instance> instanceList = new ArrayList<Instance>();
 		ArrayList<Media> songList = new ArrayList<Media>();
+		
 		System.out.println("Array Lists mado");
+		
 		initializer(roomList,entityList,instanceList,songList);
+		
 		System.out.println("WORKS");
+		
 		stage.setTitle(GAMENAME);
 		// The name of the game and the window now
 
@@ -107,7 +112,7 @@ public class Visual extends Application {
 		Canvas canvas = new Canvas(1920,1080);
 		root.getChildren().add(canvas);
 		
-		Boolean change = new Boolean(false);
+		//Boolean change = new Boolean(false);
 		
 		ArrayList<String> input = new ArrayList<String>();
 		
@@ -148,10 +153,16 @@ public class Visual extends Application {
 					public void handle(KeyEvent e) {
 						String code = e.getCode().toString();
 						input.remove(code);
+						/*
 						if (input.contains(code)) {
 							actionCounter.decrement();
 					
 						}
+						*/
+						if (e.getCode().toString().equals("SPACE")) {
+							actionCounter.decrement(); 
+						}
+						//actionCounter.decrement();
 					}
 				});
 		
@@ -164,6 +175,9 @@ public class Visual extends Application {
 		//Int dialogueCounter = new Int(0);
 		
 		graphic.drawImage(entityList.get(0).getImage(),0,0);
+		
+		MediaPlayer player = new MediaPlayer(songList.get(4));
+		player.play();
 
 		new AnimationTimer() {
 
@@ -176,14 +190,18 @@ public class Visual extends Application {
 				
 				// All characters printed
 				for (int index = 0;index < instanceList.get(instanceCounter.getInteger()).getEntities().size();index++) {
-					graphic.drawImage(entityList.get(instanceList.get(instanceCounter.getInteger()).getEntity(index).getEntityID()).getImage(),instanceList.get(instanceCounter.getInteger()).getEntity(index).getXcoord(),instanceList.get(instanceCounter.getInteger()).getEntity(index).getYcoord());
+					//graphic.drawImage(entityList.get(instanceList.get(instanceCounter.getInteger()).getEntity(index).getEntityID()).getImage(),instanceList.get(instanceCounter.getInteger()).getEntity(index).getXcoord(),instanceList.get(instanceCounter.getInteger()).getEntity(index).getYcoord());
+					printCharacter(entityList.get(instanceList.get(instanceCounter.getInteger()).getEntity(index).getEntityID()).getImage(),instanceList.get(instanceCounter.getInteger()).getEntity(index).getXcoord(),graphic,stage);
 				}
 				
 				// The random bar for text
 				//graphic.drawImage(entityList.get(0).getImage(),0,0);
+				/*
 				if (instanceCounter.getInteger() == 0) {
 					printInMiddle(entityList.get(4).getImage(),(int) (stage.getHeight() - (entityList.get(4).getImage().getHeight())),graphic,stage);
 				}
+				*/
+				printInMiddle(entityList.get(4).getImage(),(int) (stage.getHeight() - (entityList.get(4).getImage().getHeight())),graphic,stage);
 				
 				/*
 				//System.out.println("Woof");
@@ -221,7 +239,7 @@ public class Visual extends Application {
 		
 		stage.show();
 		
-		stage.setFullScreen(true);
+		//stage.setFullScreen(true);
 		
 	}
 	
@@ -236,12 +254,17 @@ public class Visual extends Application {
 		//stage.initModality(Modality.APPLICATION_MODAL);
 	}
 	
+	public void printCharacter(Image image,int x,GraphicsContext graphics,Stage stage) {
+		graphics.drawImage(image,x,stage.getHeight() - image.getHeight());
+	}
+	
 	public void printInTextBox(String text,GraphicsContext graphic,Stage stage) {
 		Image[][] imageText = wordProcessor(text);
 		
 		for (int in1 = 0;in1 < imageText.length;in1++) {
 			for (int in2 = 0;in2 < imageText[in1].length;in2++) {
 				graphic.drawImage(imageText[in1][in2],480 + (32 * in2),(stage.getHeight() - 360) + (48 * in1));
+				//graphic.drawImage(imageText[in1][in2],295 + (32 * in2),(stage.getHeight() - 360) + (48 * in1));
 			}
 		}
 	}
@@ -506,6 +529,7 @@ public class Visual extends Application {
 		
 		for (int index = 1;index < dialogueFile.size();index++) {
 			tempArray = dialogueFile.get(index).split(":");
+			//System.out.println(tempArray[0] + " " + tempArray[1] + " " + tempArray[2] + " " +  tempArray[3]);
 			initialDialogue.add(new Dialogue(tempArray[0],Integer.parseInt(tempArray[1]),tempArray[2],Boolean.parseBoolean(tempArray[3])));
 		}
 		

@@ -1,0 +1,5 @@
+1:1:Candy Candy Candy Candy:false
+2:2:NOTHING WORKS!!!:false
+3:1:THIS GAME SUCKS:false
+4:2:WHY THE F**K DID ONLY A SINGLE PERSON PROGRAM THIS GAME?!?!?!:false
+5:1:RIP ME:false

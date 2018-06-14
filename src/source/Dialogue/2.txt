@@ -1,0 +1,9 @@
+1:6:My Eyes snap open, meeting the stone-gray ceiling above.:false
+2:6:A dim light from the stream illuminates the room a dull blue color:false
+3:6:Shit, what did I do this time?:false
+4:6:oof, my head hurts:false
+5:6:Okay, what am I supposed to do now:false
+6:6:What do i do, what is the first thing to do in this situation?:false
+7:6:PANIC!!!:false
+8:6:Billy Bob proceeds to panick, hyperventilating and running into the wall. The wall chips a bit of his head and decapitates him:false
+9:6:Rip Billy Bob again:false
