@@ -18,6 +18,7 @@ import elements.Room;
 import elements.ShorthandEntities;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group; // IDK what this is for
@@ -26,10 +27,12 @@ import javafx.scene.canvas.Canvas; // JavaFX canvas class
 import javafx.scene.canvas.GraphicsContext; // IDK what this is for
 import javafx.scene.image.Image; // JavaFX importing pictures and stuff
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaView;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage; // IDK what this is for
 import javafx.stage.StageStyle;
 
@@ -62,18 +65,6 @@ public class Visual extends Application {
 	
 	// NOTE: (Word -> word images) for any word subtract 97 from the char and it will become a image to print out.
 	// The base integer value of the char "a" is 97
-	
-	/*
-	 * This is the main method of the program. It immediately starts off by calling the Javafx Applicaiton libraries.
-	 * This means that it will run 3 methods, init (to initialize), start(Stage) (mandatory and needed to run the program, and
-	 * stop(), which ends the program
-	 */
-	public static void main(String[] args) {
-		
-		// This is used to run and call the Javafx visuals
-		launch(args);
-
-	}
 
 	/*
 	 * This is the visual component, read the tutorial I posted to get a feel for the code
@@ -86,6 +77,7 @@ public class Visual extends Application {
 		// The Stage variable is the window it first initializes
 		
 		stage.initStyle(StageStyle.UNDECORATED);
+		//stage.initModality(Modality.APPLICATION_MODAL);
 
 		// TODO: move these out of the method
 		/* 
@@ -119,14 +111,25 @@ public class Visual extends Application {
 		
 		ArrayList<String> input = new ArrayList<String>();
 		
-		/*
+		
 		scene.setOnMouseClicked(
-				new EventHandler() {
+				new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent e) {
-						change = new Boolean("true");
+						//change = new Boolean("true");
+						
+						stage.close();
+						
 					}
+
+					/*
+					@Override
+					public void handle(Event arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+					*/
 				});
-		*/
+		
 		
 		scene.setOnKeyPressed(
 				new EventHandler<KeyEvent>() {
@@ -172,14 +175,14 @@ public class Visual extends Application {
 				// The random bar for text
 				//graphic.drawImage(entityList.get(0).getImage(),0,0);
 				if (counter == 0) {
-					printInMiddle(entityList.get(0).getImage(),(int) (stage.getHeight() - (entityList.get(0).getImage().getHeight())),graphic,stage);
+					printInMiddle(entityList.get(4).getImage(),(int) (stage.getHeight() - (entityList.get(4).getImage().getHeight())),graphic,stage);
 				}
 				
-				System.out.println("Woof");
+				//System.out.println("Woof");
 				String test = "oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof oof";
 				Image[][] imageTest = wordProcessor(test);
 				
-				System.out.println("Words processed");
+				//System.out.println("Words processed");
 				for (int in1 = 0;in1 < imageTest.length;in1++) {
 					for (int in2 = 0;in2 < imageTest[in1].length;in2++) {
 						graphic.drawImage(imageTest[in1][in2],480 + (32 * in2),(stage.getHeight() - 360) + (48 * in1));
@@ -193,6 +196,8 @@ public class Visual extends Application {
 		
 		stage.show();
 		
+		stage.setFullScreen(true);
+		
 	}
 	
 	/*
@@ -203,7 +208,7 @@ public class Visual extends Application {
 	 * @see javafx.application.Application#init()
 	 */
 	public void init() {
-		
+		//stage.initModality(Modality.APPLICATION_MODAL);
 	}
 	
 	public void printInTextBox(String[] text) {
@@ -224,7 +229,7 @@ public class Visual extends Application {
 	private static Image[][] wordProcessor(String text) {
 		// TODO: Finish word processing
 		String[] array = stringCutter(new String[] {text});
-		System.out.println("String cut");
+		//System.out.println("String cut");
 		Image[][] imageArray = new Image[array.length][30];
 		
 		for (int index = 0;index < array.length;index++) {

@@ -1,6 +1,6 @@
 package elements;
 
-import java.util.List;
+//import java.util.List;
 
 public class Dialogue {
 	private int speakerID;
@@ -21,7 +21,7 @@ public class Dialogue {
 	public Dialogue(int speakerID,String words) {
 		this.speakerID = speakerID;
 		this.words = words;
-		this.choice = null;
+		//this.choice = null;
 		this.nextDialogue = null;
 		this.choiceTrue = false;
 	}
