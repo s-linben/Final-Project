@@ -1,7 +1,5 @@
-1:6:Look OUt!:false
-2:6:Car screeches to a halt:false
-3:6:Someone Call an ambulance!:false
-4:6:Ambulance Arrives, running over the person:false
-5:6:oh shit! We ran over the guy:false
-6:6:billy Bob died that day:false
-7:6:rip billy bob:false
+1:7:This is Bear-chan:false
+2:7:Say hi bear kun!:false
+3:6:Rawr!!!:false
+4:7:Bear kun says hi:false
+5:7:Enjoy this poorly programmed game!:false
