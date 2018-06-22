@@ -1,10 +1,8 @@
 # About
-This is a final project on the story of a dying person, as you travel through his/her past. You uncover more and more, eventually recovering from your supposed amnesia. The main focus of the game is to create a seemingly human-like experience when dealing with death, similar to how Shakespeare did it (though less dramatic and no "poisonous unctions").
+This was a high school final project, though continued throughout summer. It's going to become a visual novel engine, to play and to make.
 
 ## Coding Information
-This project uses the javafx visual library, though most implementation are incomplete. The game should hopefully be done within the next week, else I won't graduate and my Comp. Sci. grade will tank.
-
-I will be also adding some useless stuff to test the code and make sure it works.
+Most of the frameworks will surround JavaFX in order to learn more about one of Java's basic libraries. Most of the code requires you to know basic Java, as well as reading up on JavaFX on your own time. If you have any coding questions, email me.
 
 ## Reading Links
 I like some of these documentations on how to use JavaFX. Note: Please don't sue me, I don't own any of the links that I'm posting.
