@@ -1,5 +1,5 @@
 # About
-This was a high school final project, though continued throughout summer. It's going to become a visual novel engine, to play and to make.
+This was a high school final project, though I don't like the code at all so I'm going to create another one.
 
 ## Coding Information
 Most of the frameworks will surround JavaFX in order to learn more about one of Java's basic libraries. Most of the code requires you to know basic Java, as well as reading up on JavaFX on your own time. If you have any coding questions, email me.
